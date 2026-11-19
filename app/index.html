@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Trophy Atlas — GTA VI Trophy Guide &amp; Tracker</title>
+<meta name="description" content="An offline guide and tracker for all 55 Grand Theft Auto VI trophies: step-by-step guides with sources, a roadmap to the platinum, missable flags, and saved progress.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">VI</div>
+    <div>
+      <h1>Leonida Trophy Atlas</h1>
+      <p class="sub">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies &middot; 1 platinum &middot; 2 gold &middot; 6 silver &middot; 46 bronze &middot; 28 hidden</p>
+    </div>
+  </div>
+  <div class="progress" id="progressBox" role="status">
+    <div class="big"><span id="earnedCount">0</span><span class="of">/ 55 earned</span></div>
+    <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
+    <p class="pct" id="pctLine">0% to the platinum</p>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Guide sections">
+  <button type="button" data-view="checklist" class="active" aria-current="page">Checklist</button>
+  <button type="button" data-view="roadmap">Roadmap to Platinum</button>
+  <button type="button" data-view="missables">Missables</button>
+  <button type="button" data-view="sources">Sources &amp; Method</button>
+</nav>
+
+<section class="controls" aria-label="Search and filters">
+  <label class="search">Search
+    <input id="search" type="search" placeholder="Search a trophy name, mission or keyword…" autocomplete="off">
+  </label>
+  <label>Grade
+    <select id="grade">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label>Kind
+    <select id="kind">
+      <option value="all">All kinds</option>
+      <option value="story">Story</option>
+      <option value="side">Side strands</option>
+      <option value="collectible">Collectibles</option>
+      <option value="activity">Activities</option>
+      <option value="combat">Combat &amp; heists</option>
+      <option value="exploration">Exploration</option>
+      <option value="economy">Money &amp; property</option>
+      <option value="misc">Odd &amp; rare</option>
+    </select>
+  </label>
+  <label>Status
+    <select id="status">
+      <option value="all">All trophies</option>
+      <option value="remaining">Not yet earned</option>
+      <option value="earned">Earned</option>
+      <option value="missable">Missable only</option>
+    </select>
+  </label>
+  <label class="check"><input id="spoilers" type="checkbox"> Hide story spoilers</label>
+</section>
+
+<main id="main">
+  <section id="view-checklist" class="view">
+    <p class="hint" id="countLine"></p>
+    <div class="layout">
+      <ul class="cards" id="cards"></ul>
+      <aside class="detail" id="detail" aria-live="polite">
+        <p class="empty">Select a trophy to see its step-by-step guide, sources and missable note.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="view-roadmap" class="view" hidden>
+    <h2>Roadmap to the platinum</h2>
+    <p class="lede">Play in this order. Story first — it unlocks the map, the contacts and the activities the other trophies need — then the strands, then the collectibles, then the long counts. The platinum pops the moment the 54th other trophy does.</p>
+    <ol class="phases" id="phases"></ol>
+    <p class="note">Built from the official trophy descriptions. Times are honest estimates for a first playthrough: the story is the bulk of the run, the counts are the tail.</p>
+  </section>
+
+  <section id="view-missables" class="view" hidden>
+    <h2>Missable trophies</h2>
+    <p class="lede">Five trophies need the right moment. Everything else can be earned after the story — missions replay, collectibles stay in the world, and counts are cumulative.</p>
+    <ul class="cards" id="missableCards"></ul>
+    <p class="note">Partner trophies (Hot Together, Retail Therapy) need your partner beside you in free roam — do them before the final mission, because who is available afterwards is not confirmed. The rest are one-chance opportunities inside a strand or a challenge.</p>
+  </section>
+
+  <section id="view-sources" class="view" hidden>
+    <h2>Sources &amp; method</h2>
+    <p class="lede">Every trophy's name, description and grade is the official PlayStation 5 list as published before launch; the guides are written for this atlas in the author's own words. Nothing here is copied from another guide.</p>
+    <dl class="srcs">
+      <dt>Confirmed</dt>
+      <dd>Requirement stated in the official trophy description itself — the chapter, mission or count it names. These guides are marked <span class="tag confirmed">CONFIRMED</span>.</dd>
+      <dt>Expected</dt>
+      <dd>Method extrapolated from the official description plus GTA V / GTA Online series patterns and what Rockstar showed in the GTA VI trailers. Not yet checked in the game — GTA VI released 19 Nov 2026 and its trophy list was published before launch. Marked <span class="tag expected">EXPECTED</span>.</dd>
+    </dl>
+    <h3>Source list</h3>
+    <ul class="srclist" id="srcList"></ul>
+    <h3>How progress is saved</h3>
+    <p>Your ticks live in this browser's localStorage and never leave it. Export downloads them as a JSON file; import reads one back. Reset clears them all.</p>
+    <div class="actions">
+      <button type="button" id="export">Export progress</button>
+      <label class="importBtn">Import progress <input id="import" type="file" accept="application/json"></label>
+      <button type="button" id="reset">Reset progress</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Leonida Trophy Atlas — an unofficial fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with Rockstar Games. Trophy names and descriptions are shown as PlayStation publishes them. Works offline: no network requests, no accounts, no ads.</p>
+</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
