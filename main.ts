@@ -3,17 +3,20 @@
 //
 // The guide is app/: static files a browser opens at app/index.html, with no
 // build step and no network at run time. This program does two things and
-// nothing else: it copies app/ and screenshots/ from beside this file into the
-// output directory (/output inside the grader, or $MAKEFUN_OUTPUT_DIR), then it
-// writes dossier.json into that directory with buildDossier from the kit's own
-// vendor/makefun-frontend.ts — the same library, untouched, so the scorer's
-// rebuild of the dossier matches this file byte for byte.
+// nothing else:
+//
+//   1. copies app/ and screenshots/ from beside this file into the output
+//      directory — /output inside the grader, or $MAKEFUN_OUTPUT_DIR if set;
+//   2. writes dossier.json into that directory with buildDossier from the kit's
+//      own vendor/makefun-frontend.ts — the same library, untouched, so the
+//      scorer's rebuild of the dossier matches this file byte for byte.
 //
 //   MAKEFUN_OUTPUT_DIR=out node main.ts
 //
 // The caps handed to buildDossier below are the scorer's (competition.yaml):
 // they refuse an entry the gate would refuse, and text_max_bytes is the one
-// that shapes the dossier's text.
+// that shapes the dossier's text. Keeping them in named constants rather than
+// inline literals means a cap change is a one-line edit here.
 
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -26,7 +29,14 @@ const SCREENSHOT_MAX_BYTES = 262144;
 const APP_MAX_FILES = 993;
 const APP_MAX_BYTES = 50331648;
 
-/** Copy a directory tree, creating the target, and return the paths copied. */
+/**
+ * Copy a directory tree, creating the target, and return the paths copied.
+ *
+ * Entries are read in sorted order so the returned list (and therefore the
+ * count printed at the end) is stable between runs. Empty directories are
+ * recreated as they are met; symlinks are not followed, and anything that is
+ * neither a directory nor a regular file is skipped.
+ */
 function copyTree(from: string, to: string): string[] {
   const copied: string[] = [];
   const walk = (sourceDir: string, targetDir: string) => {

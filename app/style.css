@@ -4,25 +4,34 @@
    spacing and borders only, so the first load is three small files. */
 
 :root {
+  /* Ink and paper first: everything else is read against these two. */
   --ink: #16211f;
   --ink-soft: #46544f;
   --paper: #fdf8f0;
   --card: #fffefb;
   --line: #e2d7c8;
   --line-soft: #efe7db;
+  /* The Vice City evening, in the order the eye meets it: teal night, coral
+     sunset, amber streetlight. --teal-deep is the same hue one step down, for
+     hover states and the header bar. */
   --teal: #0f4f49;
   --teal-deep: #08302c;
   --coral: #dd5327;
   --amber: #f2a104;
+  /* One colour per trophy grade, used by the grade pills and nothing else, so
+     the four grades stay recognisable wherever they appear. */
   --gold: #a8760a;
   --silver: #5c6b73;
   --bronze: #8a5628;
   --platinum: #14708f;
+  /* Warning (missable) and success (earned) pairs: a tinted background with a
+     matching border and a dark ink that still passes contrast on the tint. */
   --warn-bg: #fdeae6;
   --warn-line: #f0bcb2;
   --warn-ink: #8c1c10;
   --ok: #1b7a4c;
   --ok-bg: #eff7f2;
+  /* Shape: one radius and one shadow, reused so cards look like one family. */
   --radius: 10px;
   --shadow: 0 1px 2px rgba(22, 33, 31, .06);
 }

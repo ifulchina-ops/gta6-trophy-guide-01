@@ -8,7 +8,10 @@
 // It resolves the request path inside app/ and answers 403 for anything that
 // climbs out of it, 404 for a missing file, and otherwise streams the file with
 // the content type a browser needs. Development convenience only: no caching
-// headers beyond no-store, no compression, no directory listing.
+// headers beyond no-store, no compression, no directory listing. A directory
+// path ending in "/" is served as that directory's index.html, which is why the
+// bare root request works. Only GET and HEAD are accepted; everything else gets
+// a 405 with an Allow header.
 
 import { createReadStream, statSync } from 'node:fs';
 import { createServer } from 'node:http';

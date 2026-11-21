@@ -5,6 +5,17 @@
 // before-the-finale checklist, the spoiler switch — is kept in localStorage and
 // only leaves the browser in an export the player asks for. No libraries, no
 // build step, no network.
+//
+// The file is laid out in the order the page uses it:
+//   storage     — loadIds/saveIds, and the three localStorage keys above
+//   filtering   — the search/filter predicate shared by the list and the counts
+//   renderers   — checklist cards, the six-phase roadmap with its time strip,
+//                 missables, sources, and the detail pane with its guide and
+//                 SOURCES block
+//   events      — tick, filter, spoiler, export/import/reset, tab switching
+//   boot        — one fetch of the trophy data, then the first render
+// Nothing in this module writes to the DOM before the data has arrived, so a
+// failed fetch leaves the shell visible rather than half-drawn.
 
 const KEYS = {
   earned: 'leonida-atlas.earned.v3',
