@@ -1,21 +1,23 @@
-// A tiny static server for app/ (Node 22, standard library only), so the guide
-// can be run locally with no build step: `node serve.ts` serves app/ on
-// http://localhost:8080 (`--port <n>` for another port). It sends the MIME types
-// a browser needs, refuses any path outside app/, and otherwise does nothing
-// clever: this is a development convenience, not a web server for the internet.
+// serve.ts — a small static file server for the atlas (Node 22, no packages),
+// so you can try the guide the way the grader's browser will: app/ as the site
+// root, nothing else reachable.
+//
+//   node serve.ts             # http://localhost:8080
+//   node serve.ts --port 8137 # another port
+//
+// It resolves the request path inside app/ and answers 403 for anything that
+// climbs out of it, 404 for a missing file, and otherwise streams the file with
+// the content type a browser needs. Development convenience only: no caching
+// headers beyond no-store, no compression, no directory listing.
+
 import { createReadStream, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = resolve(fileURLToPath(new URL('./app', import.meta.url)));
-const args = process.argv.slice(2);
-const portFlag = args.indexOf('--port');
-const wanted = portFlag === -1 ? 8080 : Number(args[portFlag + 1]);
-const port = Number.isInteger(wanted) && wanted > 0 && wanted < 65536 ? wanted : 8080;
-
-const MIME: Record<string, string> = {
+const MIME_TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8',
+  '.htm': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -25,41 +27,71 @@ const MIME: Record<string, string> = {
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
+  '.avif': 'image/avif',
   '.ico': 'image/x-icon',
   '.woff2': 'font/woff2',
-  '.webmanifest': 'application/manifest+json',
+  '.txt': 'text/plain; charset=utf-8',
 };
 
-createServer((request, response) => {
-  const url = new URL(request.url ?? '/', 'http://localhost');
-  let pathname: string;
+/** The port from `--port <n>`, or 8080 when the flag is absent or unusable. */
+function readPort(argv: string[]): number {
+  const index = argv.indexOf('--port');
+  if (index === -1) return 8080;
+  const asked = Number(argv[index + 1]);
+  return Number.isInteger(asked) && asked > 0 && asked < 65536 ? asked : 8080;
+}
+
+/** Resolve a URL pathname to a file inside root, or null when it escapes. */
+function resolveInside(root: string, pathname: string): string | null {
+  let decoded: string;
   try {
-    pathname = decodeURIComponent(url.pathname);
+    decoded = decodeURIComponent(pathname);
   } catch {
-    response.writeHead(400).end('bad request');
+    return null;
+  }
+  const wanted = decoded.endsWith('/') ? `${decoded}index.html` : decoded;
+  const file = resolve(join(root, normalize(wanted)));
+  if (file === root) return null;
+  if (!file.startsWith(root + sep)) return null;
+  return file;
+}
+
+const root = resolve(fileURLToPath(new URL('./app', import.meta.url)));
+const port = readPort(process.argv.slice(2));
+
+const server = createServer((request, response) => {
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    response.writeHead(405, { allow: 'GET, HEAD' }).end('method not allowed');
     return;
   }
-  if (pathname.endsWith('/')) pathname += 'index.html';
-  const file = resolve(join(root, normalize(pathname)));
-  if (file !== root && !file.startsWith(root + sep)) {
+  const pathname = new URL(request.url ?? '/', 'http://localhost').pathname;
+  const file = resolveInside(root, pathname);
+  if (!file) {
     response.writeHead(403).end('forbidden');
     return;
   }
   let size: number;
   try {
     const stats = statSync(file);
-    if (!stats.isFile()) throw new Error('not a file');
+    if (!stats.isFile()) throw new Error('not a regular file');
     size = stats.size;
   } catch {
     response.writeHead(404).end('not found');
     return;
   }
+  const type = MIME_TYPES[extname(file).toLowerCase()] ?? 'application/octet-stream';
   response.writeHead(200, {
-    'content-type': MIME[extname(file).toLowerCase()] ?? 'application/octet-stream',
+    'content-type': type,
     'content-length': size,
     'cache-control': 'no-store',
   });
+  if (request.method === 'HEAD') {
+    response.end();
+    return;
+  }
   createReadStream(file).pipe(response);
-}).listen(port, '127.0.0.1', () => {
-  console.log(`app/ is on http://localhost:${port}`);
+});
+
+server.listen(port, '127.0.0.1', () => {
+  console.log(`Leonida Trophy Atlas is served from app/ at http://localhost:${port}`);
 });

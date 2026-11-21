@@ -1,1 +1,26 @@
-[{"file":"1-checklist-guide.jpg","note":"Checklist with the Shootist guide open: rich guide text, steps and sources visible beside the list.","path":"/","viewport":{"height":800,"width":1280}},{"file":"2-roadmap.jpg","note":"Roadmap to the platinum: six phases with time estimates and chapter mapping.","path":"/roadmap","viewport":{"height":800,"width":1280}},{"file":"3-missables.jpg","note":"Missables view with the partner warning and the before-the-finale checklist.","path":"/missables","viewport":{"height":800,"width":1280}},{"file":"4-spoilers.jpg","note":"Spoiler setting on: story trophy names and descriptions hidden until earned.","path":"/spoilers","viewport":{"height":800,"width":1280}}]
+[
+  {
+    "file": "1-checklist-guide.jpg",
+    "note": "The checklist with the Shootist guide open: rich guide text, numbered steps and the SOURCES block legible beside the list, progress at 40%.",
+    "path": "/",
+    "viewport": { "width": 1280, "height": 800 }
+  },
+  {
+    "file": "2-roadmap.jpg",
+    "note": "Roadmap to the platinum: six phases with hour estimates, chapter and mission mapping, and a live done-count per phase.",
+    "path": "/roadmap",
+    "viewport": { "width": 1280, "height": 800 }
+  },
+  {
+    "file": "3-missables.jpg",
+    "note": "Missables view: the five timing-critical trophies, the red partner warning banner and the tickable Before the Finale checklist.",
+    "path": "/missables",
+    "viewport": { "width": 1280, "height": 800 }
+  },
+  {
+    "file": "4-spoilers.jpg",
+    "note": "Spoiler setting ticked: unearned story trophies show no name, description or guide.",
+    "path": "/spoilers",
+    "viewport": { "width": 1280, "height": 800 }
+  }
+]

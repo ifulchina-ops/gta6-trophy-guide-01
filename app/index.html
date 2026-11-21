@@ -3,21 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leonida Trophy Atlas — GTA VI Trophy Guide &amp; Tracker</title>
-<meta name="description" content="An offline guide and tracker for all 55 Grand Theft Auto VI trophies: sourced step-by-step guides, a timed roadmap to the platinum, missable warnings, and saved progress.">
+<title>Leonida Trophy Atlas — GTA VI Trophy Guide and Tracker</title>
+<meta name="description" content="An offline guide and tracker for all 55 Grand Theft Auto VI trophies: sourced step-by-step guides, a timed roadmap to the platinum, every missable flagged, and progress saved in the browser.">
+<meta name="color-scheme" content="light">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to the guide</a>
+
 <header class="top">
   <div class="brand">
     <div class="mark" aria-hidden="true">VI</div>
-    <div>
+    <div class="brandText">
       <h1>Leonida Trophy Atlas</h1>
       <p class="sub">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies &middot; 1 platinum &middot; 2 gold &middot; 6 silver &middot; 46 bronze &middot; 28 hidden</p>
     </div>
   </div>
-  <div class="progress" id="progressBox" role="status">
-    <div class="big"><span id="earnedCount">0</span><span class="of">/ 55 earned</span></div>
+  <div class="progress" id="progressBox" role="status" aria-live="polite">
+    <p class="big"><span id="earnedCount">0</span><span class="of">/ 55 earned</span></p>
     <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
     <p class="pct" id="pctLine">0% to the platinum</p>
     <p class="grades" id="gradeLine"></p>
@@ -33,7 +36,7 @@
 
 <section class="controls" aria-label="Search and filters">
   <label class="search">Search
-    <input id="search" type="search" placeholder="Search a trophy name, mission or keyword…" autocomplete="off">
+    <input id="search" type="search" placeholder="Trophy name, mission, app or keyword…" autocomplete="off">
   </label>
   <label>Grade
     <select id="grade">
@@ -65,63 +68,69 @@
       <option value="missable">Missable only</option>
     </select>
   </label>
-  <label class="check"><input id="spoilers" type="checkbox"> Hide story spoilers</label>
+  <label class="check" for="spoilers"><input id="spoilers" type="checkbox"> Hide story spoilers</label>
 </section>
 
 <main id="main">
-  <section id="view-checklist" class="view">
+  <section id="view-checklist" class="view" aria-label="Trophy checklist">
     <p class="hint" id="countLine"></p>
     <div class="layout">
       <ul class="cards" id="cards"></ul>
-      <aside class="detail" id="detail" aria-live="polite">
-        <p class="empty">Select a trophy to see its step-by-step guide, sources and missable note.</p>
-      </aside>
+      <aside class="detail" id="detail" aria-live="polite" aria-label="Trophy guide"></aside>
     </div>
   </section>
 
-  <section id="view-roadmap" class="view" hidden>
+  <section id="view-roadmap" class="view" aria-label="Roadmap to the platinum" hidden>
     <h2>Roadmap to the platinum</h2>
-    <p class="lede">Play in this order. The story first — it unlocks the map, the contacts and the activities the other trophies need — then the strands, then the activities and heists, then one big map sweep, then the money and the long counts. Times are honest estimates for a first playthrough; the story is the bulk of the run and the counts are the tail.</p>
+    <p class="lede">Play in this order. The story first — it opens the map, the contacts and the activities the other trophies hang off — then the stranger strands while their markers are up, then the skill checks, then the robberies, then one long map sweep, then the money and the counters. The times are first-playthrough estimates; the story is two thirds of the run and the counts are the tail.</p>
+    <ol class="phaseTimes" id="phaseTimes" aria-label="Phase times at a glance"></ol>
     <ol class="phases" id="phases"></ol>
-    <p class="note">Built from the official trophy descriptions: which story chapters and missions, which collectibles and counts, in what order. The platinum pops the moment the 54th other trophy does.</p>
+    <p class="note">Each phase lists the chapters and missions it covers, the trophies it earns and how many of them are already ticked. The platinum pops the moment the other 54 are earned — there is no separate task behind it.</p>
   </section>
 
-  <section id="view-missables" class="view" hidden>
-    <h2>Missable trophies</h2>
-    <p class="lede">Five trophies need the right moment. Everything else can be earned after the story — missions replay, collectibles stay in the world, and counts are cumulative.</p>
-    <div class="alert" role="alert"><strong>Do the partner trophies before the final mission.</strong> Hot Together and Retail Therapy need your partner beside you in free roam, and who is available after the ending is not confirmed. The checklist below is your pre-finale save point.</div>
-    <ul class="cards" id="missableCards"></ul>
-    <h3>Before the finale — do these first</h3>
-    <p class="lede">Tick each item as you finish it. Your ticks are saved in this browser, beside your trophy progress.</p>
-    <ul class="finale" id="finaleList"></ul>
-    <p class="note">The rest of the missables are one-chance opportunities inside a strand or a challenge: take Cal's fishing challenge the moment it is offered, do not shoot Bret's unique animal before his hunt starts, and retry the jewelry store clean if a stealth attempt is spotted.</p>
+  <section id="view-missables" class="view" aria-label="Missable trophies and finale preparation" hidden>
+    <h2>Missables &amp; finale prep</h2>
+    <p class="lede">Five trophies need the right moment. Everything else waits for you: missions replay, collectibles stay in the world, and every count is cumulative.</p>
+    <div class="alert" role="alert">
+      <strong>Do the partner trophies before the final mission.</strong>
+      Hot Together and Retail Therapy both need your partner beside you in free roam, and no official source says who is still available after the ending. Treat the checklist below as your pre-finale save point.
+    </div>
+    <div class="mgrid">
+      <ul class="cards" id="missableCards"></ul>
+      <div class="finaleBlock">
+        <h3>Before the finale — do these first</h3>
+        <p class="lede">Tick each one as you finish it. The ticks are saved in this browser beside your trophy progress, so they survive a reload.</p>
+        <ul class="finale" id="finaleList"></ul>
+      </div>
+    </div>
+    <p class="note">The other missables are one-chance moments inside a strand: take Cal's fishing challenge the moment he offers it, never shoot Bret's unique animal before his hunt begins, and treat a spotted jewelry robbery as failed and start it again clean.</p>
   </section>
 
-  <section id="view-sources" class="view" hidden>
+  <section id="view-sources" class="view" aria-label="Sources and method" hidden>
     <h2>Sources &amp; method</h2>
-    <p class="lede">Every trophy's name, description and grade is the official PlayStation 5 list as published before launch; the guides are written for this atlas in the author's own words. Nothing here is copied from another guide.</p>
-    <dl class="srcs">
-      <dt>Confirmed</dt>
-      <dd>Requirement stated in the official trophy description itself — the chapter, mission or count it names. These guides are marked <span class="tag confirmed">CONFIRMED</span>.</dd>
-      <dt>Expected</dt>
-      <dd>Method worked out from the official description plus GTA V / GTA Online series patterns and what Rockstar showed in the GTA VI trailers. Not yet checked in the game — the list was published before GTA VI launched. Marked <span class="tag expected">EXPECTED</span>.</dd>
-      <dt>Counts</dt>
-      <dd>Every number a guide quotes — 42 Shooting Range challenges, 14 drone locations, 18 meditation spots, 52 areas, 100 vehicles, 100 WAiNK locations, 250 stunts, 500 choices — is the number PSN itself tracks, as PSNProfiles lists it.</dd>
+    <p class="lede">Every name, description and grade below is the official PlayStation 5 list as Exophase and PSNProfiles publish it. Every guide is written for this atlas; sources are cited, never copied.</p>
+    <dl class="srcdl">
+      <dt>What CONFIRMED means</dt>
+      <dd>The requirement is spelled out in the official trophy description itself — the mission name, the chapter, or a count. Those guides only explain how to reach the thing the description already names.</dd>
+      <dt>What EXPECTED means</dt>
+      <dd>The description names the goal but not the route, so the method is reasoned from it plus GTA V and GTA Online precedent and what the two GTA VI trailers show. The list was published before launch, so nothing here has been played and checked in the retail game. Those guides say so.</dd>
+      <dt>Where the counts come from</dt>
+      <dd>42 Shooting Range challenges, 14 drone race locations, 18 meditation spots, 52 areas, 100 vehicles, 100 WAiNK locations, 250 stunts, 500 choices, 8 strands, 9 gangs, 8 garages, 10 vehicles: each is the target PSN itself tracks, as PSNProfiles lists it. Where the official description gives no number, the guide gives none.</dd>
     </dl>
     <h3>Source list</h3>
     <ul class="srclist" id="srcList"></ul>
-    <h3>How progress is saved</h3>
-    <p>Your ticks live in this browser's localStorage and never leave it. Export downloads them as a JSON file; import reads one back. Reset clears them all.</p>
+    <h3>How your progress is kept</h3>
+    <p class="prose">Ticks live in this browser's localStorage and are never sent anywhere. Export writes them to a JSON file you keep; import reads one back, which is how you move progress between browsers; reset clears everything after a confirmation. Nothing in this app makes a network request.</p>
     <div class="actions">
       <button type="button" id="export">Export progress</button>
-      <label class="importBtn">Import progress <input id="import" type="file" accept="application/json"></label>
+      <label class="importBtn" for="import">Import progress<input id="import" type="file" accept="application/json,.json"></label>
       <button type="button" id="reset">Reset progress</button>
     </div>
   </section>
 </main>
 
 <footer>
-  <p>Leonida Trophy Atlas — an unofficial fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with Rockstar Games. Trophy names and descriptions are shown as PlayStation publishes them. Works offline: no network requests, no accounts, no ads.</p>
+  <p>Leonida Trophy Atlas — an unofficial fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with Rockstar Games and shows no Rockstar logo or artwork of the game. Trophy names and descriptions appear as PlayStation publishes them. Runs offline: no network requests, no accounts, no trackers.</p>
 </footer>
 <script type="module" src="app.js"></script>
 </body>
