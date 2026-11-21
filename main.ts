@@ -1,11 +1,13 @@
-// Leonida Trophy Atlas — a GTA VI trophy guide for gta6-trophy-guide-01 (program/v1, Node 22, standard library
-// only). The guide is this directory's app/ folder: plain static files a browser opens at app/index.html (one ES
-// module, one stylesheet, no build step, no network at run time), and its trophy list and guides live in
-// app/data/trophies.json. This program hands it in: it copies app/ and screenshots/ from beside this file to
-// /output and writes /output/dossier.json with the vendored make.fun library. Leave vendor/makefun-frontend.ts
-// untouched: the scorer requires dossier.json to be byte for byte what its own copy writes.
+// Leonida Trophy Atlas — the hand-in program for gta6-trophy-guide-01 (program/v1,
+// Node 22, standard library only). The guide itself is this directory's app/
+// folder: plain static files a browser opens at app/index.html — one ES module,
+// one stylesheet, the trophy data in app/data/trophies.json — no build step and
+// no network at run time. This program hands it in: it copies app/ and
+// screenshots/ from beside this file to /output and writes /output/dossier.json
+// with the vendored make.fun library. Leave vendor/makefun-frontend.ts alone:
+// the scorer requires dossier.json to be byte for byte what its own copy writes.
 //
-// Serve it locally with `node serve.ts`, then open http://localhost:8080.
+// Try the guide locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   MAKEFUN_OUTPUT_DIR=out node main.ts
 
@@ -24,19 +26,18 @@ if (existsSync(join(here, 'screenshots'))) {
   cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
 }
 
-// The scorer's own caps (competition.yaml, The gate): only text_max_bytes shapes the bytes; the others refuse an
-// entry the scorer would refuse (more than 4 screenshots or one over 256 KiB; more than 993 files and directories
-// in app/ or 48 MiB of app files: app/ counts beside /output's own 1000-entry cap, its screenshots/ and
-// dossier.json). Keep the tree small: the guide's data file is one JSON, the app is three source files, and the
-// screenshots are four JPEGs — nothing else is copied.
+// The scorer's own caps (competition.yaml, The gate). Only text_max_bytes shapes
+// the bytes; the others refuse an entry the scorer would refuse — more than 4
+// screenshots or one over 256 KiB, more than 993 files and directories in app/
+// or 48 MiB of app files (app/ counts beside /output's own 1000-entry cap, its
+// screenshots/ and dossier.json). The tree stays small: the guide's data is one
+// JSON file, the app is three source files, and the screenshots are four JPEGs.
 const dossierPath = join(out, 'dossier.json');
-writeFileSync(
-  dossierPath,
-  buildDossier(out, {
-    text_max_bytes: 163840,
-    screenshots: { max: 4, max_bytes: 262144 },
-    app_max_files: 993,
-    app_max_bytes: 50331648,
-  }),
-);
+const dossier = buildDossier(out, {
+  text_max_bytes: 163840,
+  screenshots: { max: 4, max_bytes: 262144 },
+  app_max_files: 993,
+  app_max_bytes: 50331648,
+});
+writeFileSync(dossierPath, dossier);
 console.log(`Leonida Trophy Atlas handed in: ${dossierPath}`);

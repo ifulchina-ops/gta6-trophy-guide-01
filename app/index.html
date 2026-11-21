@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Leonida Trophy Atlas — GTA VI Trophy Guide &amp; Tracker</title>
-<meta name="description" content="An offline guide and tracker for all 55 Grand Theft Auto VI trophies: step-by-step guides with sources, a roadmap to the platinum, missable flags, and saved progress.">
+<meta name="description" content="An offline guide and tracker for all 55 Grand Theft Auto VI trophies: sourced step-by-step guides, a timed roadmap to the platinum, missable warnings, and saved progress.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,13 +20,14 @@
     <div class="big"><span id="earnedCount">0</span><span class="of">/ 55 earned</span></div>
     <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
     <p class="pct" id="pctLine">0% to the platinum</p>
+    <p class="grades" id="gradeLine"></p>
   </div>
 </header>
 
 <nav class="tabs" aria-label="Guide sections">
   <button type="button" data-view="checklist" class="active" aria-current="page">Checklist</button>
   <button type="button" data-view="roadmap">Roadmap to Platinum</button>
-  <button type="button" data-view="missables">Missables</button>
+  <button type="button" data-view="missables">Missables &amp; Finale Prep</button>
   <button type="button" data-view="sources">Sources &amp; Method</button>
 </nav>
 
@@ -80,16 +81,20 @@
 
   <section id="view-roadmap" class="view" hidden>
     <h2>Roadmap to the platinum</h2>
-    <p class="lede">Play in this order. Story first — it unlocks the map, the contacts and the activities the other trophies need — then the strands, then the collectibles, then the long counts. The platinum pops the moment the 54th other trophy does.</p>
+    <p class="lede">Play in this order. The story first — it unlocks the map, the contacts and the activities the other trophies need — then the strands, then the activities and heists, then one big map sweep, then the money and the long counts. Times are honest estimates for a first playthrough; the story is the bulk of the run and the counts are the tail.</p>
     <ol class="phases" id="phases"></ol>
-    <p class="note">Built from the official trophy descriptions. Times are honest estimates for a first playthrough: the story is the bulk of the run, the counts are the tail.</p>
+    <p class="note">Built from the official trophy descriptions: which story chapters and missions, which collectibles and counts, in what order. The platinum pops the moment the 54th other trophy does.</p>
   </section>
 
   <section id="view-missables" class="view" hidden>
     <h2>Missable trophies</h2>
     <p class="lede">Five trophies need the right moment. Everything else can be earned after the story — missions replay, collectibles stay in the world, and counts are cumulative.</p>
+    <div class="alert" role="alert"><strong>Do the partner trophies before the final mission.</strong> Hot Together and Retail Therapy need your partner beside you in free roam, and who is available after the ending is not confirmed. The checklist below is your pre-finale save point.</div>
     <ul class="cards" id="missableCards"></ul>
-    <p class="note">Partner trophies (Hot Together, Retail Therapy) need your partner beside you in free roam — do them before the final mission, because who is available afterwards is not confirmed. The rest are one-chance opportunities inside a strand or a challenge.</p>
+    <h3>Before the finale — do these first</h3>
+    <p class="lede">Tick each item as you finish it. Your ticks are saved in this browser, beside your trophy progress.</p>
+    <ul class="finale" id="finaleList"></ul>
+    <p class="note">The rest of the missables are one-chance opportunities inside a strand or a challenge: take Cal's fishing challenge the moment it is offered, do not shoot Bret's unique animal before his hunt starts, and retry the jewelry store clean if a stealth attempt is spotted.</p>
   </section>
 
   <section id="view-sources" class="view" hidden>
@@ -99,7 +104,9 @@
       <dt>Confirmed</dt>
       <dd>Requirement stated in the official trophy description itself — the chapter, mission or count it names. These guides are marked <span class="tag confirmed">CONFIRMED</span>.</dd>
       <dt>Expected</dt>
-      <dd>Method extrapolated from the official description plus GTA V / GTA Online series patterns and what Rockstar showed in the GTA VI trailers. Not yet checked in the game — GTA VI released 19 Nov 2026 and its trophy list was published before launch. Marked <span class="tag expected">EXPECTED</span>.</dd>
+      <dd>Method worked out from the official description plus GTA V / GTA Online series patterns and what Rockstar showed in the GTA VI trailers. Not yet checked in the game — the list was published before GTA VI launched. Marked <span class="tag expected">EXPECTED</span>.</dd>
+      <dt>Counts</dt>
+      <dd>Every number a guide quotes — 42 Shooting Range challenges, 14 drone locations, 18 meditation spots, 52 areas, 100 vehicles, 100 WAiNK locations, 250 stunts, 500 choices — is the number PSN itself tracks, as PSNProfiles lists it.</dd>
     </dl>
     <h3>Source list</h3>
     <ul class="srclist" id="srcList"></ul>
