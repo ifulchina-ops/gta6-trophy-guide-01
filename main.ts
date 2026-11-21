@@ -16,7 +16,9 @@
 // The caps handed to buildDossier below are the scorer's (competition.yaml):
 // they refuse an entry the gate would refuse, and text_max_bytes is the one
 // that shapes the dossier's text. Keeping them in named constants rather than
-// inline literals means a cap change is a one-line edit here.
+// inline literals means a cap change is a one-line edit here. They are passed
+// straight through — this file never counts bytes or drops a screenshot itself,
+// so what the gate sees and what buildDossier enforces cannot disagree.
 
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -35,7 +37,9 @@ const APP_MAX_BYTES = 50331648;
  * Entries are read in sorted order so the returned list (and therefore the
  * count printed at the end) is stable between runs. Empty directories are
  * recreated as they are met; symlinks are not followed, and anything that is
- * neither a directory nor a regular file is skipped.
+ * neither a directory nor a regular file is skipped. The returned paths are
+ * relative to `from`, which keeps the printed summary short and independent of
+ * where the output directory happens to live.
  */
 function copyTree(from: string, to: string): string[] {
   const copied: string[] = [];

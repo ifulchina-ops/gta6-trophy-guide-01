@@ -1,7 +1,15 @@
 /* Leonida Trophy Atlas — the whole look, drawn from scratch in CSS.
    Palette: a Vice City evening — deep teal night sky, coral sunset, amber
    streetlight on warm paper. No images and no fonts are loaded: type, colour,
-   spacing and borders only, so the first load is three small files. */
+   spacing and borders only, so the first load is three small files.
+
+   The variables below are the only source of colour in the stylesheet; every
+   rule reads from them, so the theme is changed in this one block. They fall
+   into five groups: ink and paper (the two everything else is read against),
+   the evening hues used for chrome and accents, one colour per trophy grade,
+   the warning/success pairs for missables and earned rows, and two shape
+   tokens (radius, shadow) that keep the cards looking like one family. */
+
 
 :root {
   /* Ink and paper first: everything else is read against these two. */

@@ -12,6 +12,13 @@
 // path ending in "/" is served as that directory's index.html, which is why the
 // bare root request works. Only GET and HEAD are accepted; everything else gets
 // a 405 with an Allow header.
+//
+// The containment check is the part worth reading twice: the decoded pathname
+// is normalised against the app root and then compared on the resolved absolute
+// path with a trailing separator, so "/../serve.ts" and a sibling directory
+// that merely shares the root's prefix both fail. Nothing is served from
+// outside app/ — not this file, not the screenshots, not the kit.
+
 
 import { createReadStream, statSync } from 'node:fs';
 import { createServer } from 'node:http';

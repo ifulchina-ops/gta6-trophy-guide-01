@@ -1,7 +1,10 @@
 // Leonida Trophy Atlas — the tracker's single module.
 //
+// One file on purpose: the whole app is this module plus a stylesheet and a
+// JSON data file, so there is nothing to bundle and nothing to version.
+//
 // Trophy facts are read once from data/trophies.json, a file of the app's own
-// server; nothing else is fetched. What the player does — trophy ticks, the
+// origin; nothing else is fetched. What the player does — trophy ticks, the
 // before-the-finale checklist, the spoiler switch — is kept in localStorage and
 // only leaves the browser in an export the player asks for. No libraries, no
 // build step, no network.
@@ -14,8 +17,12 @@
 //                 SOURCES block
 //   events      — tick, filter, spoiler, export/import/reset, tab switching
 //   boot        — one fetch of the trophy data, then the first render
-// Nothing in this module writes to the DOM before the data has arrived, so a
-// failed fetch leaves the shell visible rather than half-drawn.
+// Rendering is re-run from state rather than patched in place: a tick rebuilds
+// the counts and the cards from the same arrays, so the list, the header and
+// the roadmap cannot drift apart. Nothing in this module writes to the DOM
+// before the data has arrived, so a failed fetch leaves the shell visible
+// rather than half-drawn.
+
 
 const KEYS = {
   earned: 'leonida-atlas.earned.v3',
