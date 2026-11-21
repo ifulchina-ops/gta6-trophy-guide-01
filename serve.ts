@@ -1,31 +1,35 @@
-// serve.ts — a small static file server for the atlas (Node 22, no packages),
-// so you can try the guide the way the grader's browser will: app/ as the site
-// root, nothing else reachable.
+// serve.ts — a static file server for the atlas (Node 22, no packages), so the
+// guide can be tried the way the finalist review opens it: app/ as the site
+// root, and nothing outside app/ reachable.
 //
 //   node serve.ts             # http://localhost:8080
 //   node serve.ts --port 8137 # another port
 //
-// It resolves the request path inside app/ and answers 403 for anything that
-// climbs out of it, 404 for a missing file, and otherwise streams the file with
-// the content type a browser needs. Development convenience only: no caching
-// headers beyond no-store, no compression, no directory listing, no build step
-// and no runtime dependency, so it runs on a bare Node 22. A directory path
-// ending in "/" is served as that directory's index.html, which is why the
-// bare root request works. Only GET and HEAD are accepted; everything else gets
-// a 405 with an Allow header.
+// A request path is resolved inside app/ and refused with 403 when it climbs
+// out, answered 404 when the file is missing, and otherwise streamed with the
+// content type a browser needs. A path ending in "/" is served as that
+// directory's index.html, which is why the bare root request works. Only GET
+// and HEAD are answered; anything else gets 405 with an Allow header.
 //
-// The containment check is the part worth reading twice: the decoded pathname
-// is normalised against the app root and then compared on the resolved absolute
-// path with a trailing separator, so "/../serve.ts" and a sibling directory
-// that merely shares the root's prefix both fail. Nothing is served from
-// outside app/ — not this file, not the screenshots, not the kit.
-
+// The containment check is the part worth a second read. The pathname is
+// decoded, appended to index.html when it ends in a slash, normalised, joined
+// to the root and resolved; the result must then start with the root plus a
+// separator. Comparing on the resolved absolute path with the trailing
+// separator on is what turns away both "/../serve.ts" and a sibling directory
+// whose name merely begins with the root's. Nothing outside app/ is served --
+// not this file, not screenshots/, not the vendor library.
+//
+// Development convenience only: no compression, no directory listing, no build
+// step and no dependency, so it runs on a bare Node 22.
 
 import { createReadStream, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// Only what app/ can actually contain: a data: URI carries fonts and images,
+// so no font file is served here. An unknown extension falls back to a byte
+// stream rather than guessing.
 const MIME_TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8',
   '.htm': 'text/html; charset=utf-8',
@@ -44,15 +48,20 @@ const MIME_TYPES: Record<string, string> = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
-/** The port from `--port <n>`, or 8080 when the flag is absent or unusable. */
+/** The port given with `--port <n>`, else 8080 when the flag is absent or bad. */
 function readPort(argv: string[]): number {
-  const index = argv.indexOf('--port');
-  if (index === -1) return 8080;
-  const asked = Number(argv[index + 1]);
+  const at = argv.indexOf('--port');
+  if (at === -1) return 8080;
+  const asked = Number(argv[at + 1]);
   return Number.isInteger(asked) && asked > 0 && asked < 65536 ? asked : 8080;
 }
 
-/** Resolve a URL pathname to a file inside root, or null when it escapes. */
+/**
+ * Map a URL pathname to a file path inside root, or null when it escapes.
+ *
+ * A malformed percent-escape is a null too: decodeURIComponent throws on one,
+ * and a request that cannot be decoded cannot be shown to be inside the root.
+ */
 function resolveInside(root: string, pathname: string): string | null {
   let decoded: string;
   try {
@@ -90,9 +99,8 @@ const server = createServer((request, response) => {
     response.writeHead(404).end('not found');
     return;
   }
-  const type = MIME_TYPES[extname(file).toLowerCase()] ?? 'application/octet-stream';
   response.writeHead(200, {
-    'content-type': type,
+    'content-type': MIME_TYPES[extname(file).toLowerCase()] ?? 'application/octet-stream',
     'content-length': size,
     'cache-control': 'no-store',
   });

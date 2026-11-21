@@ -1,30 +1,30 @@
-// Leonida Trophy Atlas — the tracker's single module.
+// Leonida Trophy Atlas — the tracker's only module.
 //
-// One file on purpose: the whole app is this module plus a stylesheet and a
-// JSON data file, so there is nothing to bundle and nothing to version.
+// One file by design. The app is this module, one stylesheet and one JSON data
+// file, so there is no bundle, no build step and nothing to keep in version
+// lockstep. Trophy facts are read once from data/trophies.json, a file of the
+// app's own origin, and nothing else is ever fetched. What the player does —
+// trophy ticks, the before-the-finale checklist, the spoiler switch — lives in
+// localStorage and only leaves the browser in an export the player asks for.
 //
-// Trophy facts are read once from data/trophies.json, a file of the app's own
-// origin; nothing else is fetched. What the player does — trophy ticks, the
-// before-the-finale checklist, the spoiler switch — is kept in localStorage and
-// only leaves the browser in an export the player asks for. No libraries, no
-// build step, no network.
+// The module is laid out in the order the page uses it:
+//   state       — the four stored sets/flags, read once at load
+//   storage     — loadIds/storeIds over the three KEYS right below
+//   lookups     — tiny helpers shared by every renderer
+//   filters     — the one predicate behind the list and its counts
+//   renderers   — checklist cards, the detail pane with guide/steps/sources,
+//                 the six-phase roadmap with its time strip, missables with the
+//                 finale checklist, and the source list
+//   views       — tab switching, then the full repaint
+//   wiring      — tick, filter, spoiler, export/import/reset
+//   boot        — one fetch of the data, then the first paint
 //
-// The file is laid out in the order the page uses it:
-//   storage     — loadIds/saveIds over the three KEYS declared just below
-//   filtering   — the search/filter predicate shared by the list and the counts
-//   renderers   — one per view: checklist cards, the six-phase roadmap with its
-//                 time strip, missables with the finale checklist, sources, and
-//                 the detail pane with its guide, numbered steps and SOURCES
-//   events      — tick, filter, spoiler, export/import/reset, tab switching
-//   boot        — one fetch of the trophy data, then the first render
-// All four views read the same in-memory state, so a tick anywhere updates the
-// header counts, the cards and the per-phase done totals together.
-// Rendering is re-run from state rather than patched in place: a tick rebuilds
-// the counts and the cards from the same arrays, so the list, the header and
-// the roadmap cannot drift apart. Nothing in this module writes to the DOM
-// before the data has arrived, so a failed fetch leaves the shell visible
-// rather than half-drawn.
-
+// Every view reads the same in-memory state, so a tick anywhere refreshes the
+// header counts, the cards, the roadmap totals and the missable list together.
+// Rendering is redone from state rather than patched in place: a tick rebuilds
+// the counts and the cards from the same arrays, so list, header and roadmap
+// cannot drift apart. Nothing is written to the DOM before the data arrives,
+// so a failed fetch leaves the shell standing rather than half-drawn.
 
 const KEYS = {
   earned: 'leonida-atlas.earned.v3',
@@ -45,7 +45,7 @@ const KIND_LABEL = {
   misc: 'Odd & rare',
 };
 
-// Where each guide's facts come from. The app links out to these; it never
+// Where each guide's facts come from. The app links out to these and never
 // loads anything from them. `series` is a body of precedent, so it has no page.
 const SOURCES = {
   exophase: ['Exophase — GTA VI trophy list', 'https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/'],
@@ -66,6 +66,8 @@ const MISSABLE_WHEN = {
   39: 'Retryable, but a spotted attempt fails — go in clean.',
 };
 
+// ---- state ---------------------------------------------------------------
+
 const state = {
   trophies: [],
   earned: loadIds(KEYS.earned),
@@ -76,7 +78,7 @@ const state = {
 
 // ---- storage -------------------------------------------------------------
 
-/** Read a stored array of integers, tolerating anything else. */
+/** Read a stored array of integers, tolerating anything else in the slot. */
 function loadIds(key) {
   try {
     const raw = JSON.parse(localStorage.getItem(key) ?? '[]');
@@ -115,7 +117,7 @@ function concealed(t) {
   return state.spoilers && t.kind === 'story' && !has(t);
 }
 
-// ---- element helpers, so the renderers read as markup --------------------
+// ---- element helpers, so the renderers read as markup ---------------------
 
 function el(tag, cls, text) {
   const node = document.createElement(tag);
@@ -318,8 +320,9 @@ function renderDetail() {
 // ---- roadmap -------------------------------------------------------------
 //
 // Six phases in play order. Each names the chapters, missions and counts it
-// covers (all taken from the official descriptions), an honest first-run time
-// estimate, and the trophy ids it should earn. The ids point into the JSON.
+// covers (all of them straight out of the official descriptions), an honest
+// first-run time estimate, and the trophy ids it should earn. The ids are the
+// JSON's ids, so a phase can never list a trophy the data does not hold.
 
 const PHASES = [
   {
@@ -327,7 +330,7 @@ const PHASES = [
     short: 'Story',
     when: 'Chapters 1\u20134 and the final mission \u00b7 \u224830\u201340 hours',
     maps: 'Gone Fishing \u00b7 Breakfast Run \u00b7 The Cartel Heist \u00b7 Child\u2019s Play \u00b7 Headliners \u00b7 VCIA Takedown \u00b7 Operation Savage Glory \u00b7 the four chapter trophies \u00b7 the finale',
-    text: 'The story comes first because it unlocks everything else: the map, the contacts, the venues and the stranger markers the later phases need. Gone Fishing opens the game, the named-mission trophies follow in story order, and each chapter trophy pops at its chapter-complete screen. Before you start the final mission, stop and clear the Before the Finale checklist — the two partner trophies need your partner in free roam, and who is around after the ending is not confirmed by any official source.',
+    text: 'The story goes first because it unlocks everything else: the map, the contacts, the venues and the stranger markers the later phases need. Gone Fishing opens the game, the named-mission trophies follow in story order, and each chapter trophy pops at its chapter-complete screen. Before you start the final mission, stop and clear the Before the Finale checklist — the two partner trophies need your partner in free roam, and no official source says who is still around after the ending.',
     ids: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 33, 34],
   },
   {
@@ -335,7 +338,7 @@ const PHASES = [
     short: 'Strangers',
     when: 'Free roam between chapters and after the story \u00b7 \u22488\u201312 hours',
     maps: 'Andy \u00b7 Kenton \u00b7 Billy \u00b7 Randy \u00b7 Tyrone \u00b7 Bret \u00b7 Cal \u00b7 three more strands \u00b7 8 strands for the silver',
-    text: 'Five strangers have a trophy for finishing their strand, and the silver wants eight strands in all, so three more come from the map. New markers appear as the story advances, so sweep the map after each chapter rather than saving them all for the end. Take Cal\u2019s fishing challenge the first time it is offered and never shoot Bret\u2019s unique animal outside his hunt — those two are the phase\u2019s missable moments.',
+    text: 'Five strangers carry a trophy for finishing their strand, and the silver wants eight strands in all, so three more come off the map. New markers appear as the story advances, so sweep the map after each chapter rather than saving them all for the end. Take Cal\u2019s fishing challenge the first time it is offered and never shoot Bret\u2019s unique animal outside his hunt — those two are the phase\u2019s missable moments.',
     ids: [22, 23, 24, 25, 26, 27, 20, 29],
   },
   {
@@ -359,7 +362,7 @@ const PHASES = [
     short: 'Map sweep',
     when: 'One long route around Leonida \u00b7 \u22488\u201312 hours',
     maps: '52 areas \u00b7 18 meditation spots \u00b7 100 WAiNK locations \u00b7 3 card sets \u00b7 100 vehicles \u00b7 Ocean Beach \u00b7 the showroom smash',
-    text: 'Do this as one sweep, not five: the map is the same map. Drive, boat and fly into every grey area for the 52, meditate at the 18 spots you pass, WAiNK It at every landmark and beach you stop at, and pick up cards in interiors as you go. Grab a different vehicle at every opportunity — 100 distinct vehicles is discovered, not driven. The Ocean Beach cocktail and the showroom smash are stops on the route.',
+    text: 'Do this as one sweep, not five: the map is the same map. Drive, boat and fly into every grey area for the 52, meditate at the 18 spots you pass, WAiNK It at every landmark and beach you stop at, and pick up cards in interiors as you go. Take a different vehicle at every opportunity — 100 distinct vehicles is discovered, not driven. The Ocean Beach cocktail and the showroom smash are stops on the route.',
     ids: [28, 30, 31, 35, 42, 44, 45],
   },
   {
@@ -371,6 +374,10 @@ const PHASES = [
     ids: [14, 15, 32, 48, 52, 53, 54, 55, 37, 47, 49, 50, 1],
   },
 ];
+
+function phaseDone(phase) {
+  return phase.ids.filter((id) => state.earned.has(id)).length;
+}
 
 function renderRoadmap() {
   const list = $('phases');
@@ -388,32 +395,31 @@ function renderRoadmap() {
     for (const id of phase.ids) {
       const t = byId(id);
       if (!t) continue;
-      chips.append(el('li', has(t) ? 'done' : '', `${has(t) ? '\u2713 ' : '\u25cb '}${t.name} (${gradeName(t.grade)})`));
+      const mark = has(t) ? '\u2713 ' : '\u25cb ';
+      chips.append(el('li', has(t) ? 'done' : '', `${mark}${t.name} (${gradeName(t.grade)})`));
     }
     body.append(chips);
 
-    const done = phase.ids.filter((id) => state.earned.has(id)).length;
-    li.append(el('div', 'num', String(index + 1)), body, el('div', 'count', `${done}/${phase.ids.length} done`));
+    li.append(el('div', 'num', String(index + 1)), body, el('div', 'count', `${phaseDone(phase)}/${phase.ids.length} done`));
     list.append(li);
   });
   renderPhaseStrip();
 }
 
 /**
- * The whole plan in one row: number, short name, hours, done-count. Built from
- * the same PHASES array as the cards, so the two can never drift apart.
+ * The whole plan as one row of cells: number, short name, hours, done-count.
+ * Built from the same PHASES array as the cards, so the two cannot disagree.
  */
 function renderPhaseStrip() {
   const strip = $('phaseTimes');
   strip.replaceChildren();
   PHASES.forEach((phase, index) => {
     const hours = /(\u2248[\d\u2013.-]+ ?hours)/.exec(phase.when);
-    const done = phase.ids.filter((id) => state.earned.has(id)).length;
     const row = el('div', 'pt');
     row.append(el('span', 'ptNum', String(index + 1)));
     row.append(el('span', 'ptName', phase.short));
     row.append(el('span', 'ptHours', hours ? hours[1] : ''));
-    row.append(el('span', 'ptDone', `${done}/${phase.ids.length} done`));
+    row.append(el('span', 'ptDone', `${phaseDone(phase)}/${phase.ids.length} done`));
     const li = el('li');
     li.append(row);
     strip.append(li);
@@ -441,7 +447,7 @@ function renderMissables() {
     card.classList.toggle('earned', has(t));
 
     const top = el('div', 'row1');
-    top.append(el('span', 'name', `${t.name} — ${MISSABLE_WHEN[t.id] ?? 'mind the timing'}`));
+    top.append(el('span', 'name', `${t.name} \u2014 ${MISSABLE_WHEN[t.id] ?? 'mind the timing'}`));
 
     const meta = el('div', 'meta');
     meta.append(gradePill(t));
@@ -496,9 +502,9 @@ function renderSources() {
     const li = document.createElement('li');
     if (url) {
       li.append(externalLink(label, url));
-      li.append(document.createTextNode(` — ${url}`));
+      li.append(document.createTextNode(` \u2014 ${url}`));
     } else {
-      li.append(document.createTextNode(`${label} — precedent only, no page to link`));
+      li.append(document.createTextNode(`${label} \u2014 precedent only, no page to link`));
     }
     list.append(li);
   }
@@ -608,3 +614,4 @@ renderRoadmap();
 renderMissables();
 renderFinale();
 renderSources();
+

@@ -1,29 +1,25 @@
-// Leonida Trophy Atlas — hand-in program for gta6-trophy-guide-01 (program/v1,
-// Node 22, standard library only).
+// main.ts — the hand-in program for the Leonida Trophy Atlas
+// (gta6-trophy-guide-01, program/v1: Node 22, standard library only).
 //
-// The guide is app/: static files a browser opens at app/index.html, with no
-// build step and no network at run time. This program does two things and
-// nothing else:
+// The guide itself is app/: plain static files, opened at app/index.html, with
+// no build step and no network at run time. This program does exactly two
+// things, and nothing else:
 //
 //   1. copies app/ and screenshots/ from beside this file into the output
-//      directory — /output inside the grader, or $MAKEFUN_OUTPUT_DIR if set;
-//   2. writes dossier.json into that directory with buildDossier from the kit's
-//      own vendor/makefun-frontend.ts — the same library, untouched, so the
-//      scorer's rebuild of the dossier matches this file byte for byte.
+//      directory — /output in the grader, $MAKEFUN_OUTPUT_DIR outside it;
+//   2. writes dossier.json there with buildDossier, imported untouched from
+//      vendor/makefun-frontend.ts, so the scorer's own rebuild of the dossier
+//      from app/ and screenshots/ matches this one byte for byte.
 //
 //   MAKEFUN_OUTPUT_DIR=out node main.ts
 //
-// The caps handed to buildDossier below are the scorer's (competition.yaml):
-// they refuse an entry the gate would refuse, and text_max_bytes is the one
-// that shapes the dossier's text. Keeping them in named constants rather than
-// inline literals means a cap change is a one-line edit here. They are passed
-// straight through — this file never counts bytes or drops a screenshot itself,
-// so what the gate sees and what buildDossier enforces cannot disagree.
-//
-// Because the caps live in buildDossier, the copy above is unconditional: every
-// app file and every screenshot is handed over and the library decides what
-// fits. That way a failure is reported once, by the code the scorer runs too,
-// instead of being silently absorbed by a second opinion written here.
+// The caps are named constants rather than literals at the call site: they are
+// the scorer's own (text_max_bytes 163840, 4 screenshots of 262144 bytes, 993
+// app entries, 48 MiB of app), and a cap change is then a one-line edit here.
+// They are passed straight through. The copy above is unconditional — every
+// app file and every screenshot goes over, and buildDossier decides what fits
+// — because a second opinion written here could only disagree with the code
+// the scorer runs, and a refusal is worth reading once, in the scorer's words.
 
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -36,17 +32,26 @@ const SCREENSHOT_MAX_BYTES = 262144;
 const APP_MAX_FILES = 993;
 const APP_MAX_BYTES = 50331648;
 
+const here = fileURLToPath(new URL('.', import.meta.url));
+const appSource = join(here, 'app');
+
+// A missing app/ would otherwise reach buildDossier as an empty tree and come
+// back as a cap complaint, which reads as the wrong problem: say what is
+// missing, and by name, before the copy runs.
+if (!existsSync(join(appSource, 'index.html'))) {
+  throw new Error(`main.ts: no app/index.html under ${appSource}`);
+}
+
 /**
- * Copy a directory tree, creating the target, and return the paths copied.
+ * Copy a directory tree into `to`, creating directories as they are met, and
+ * return every file copied as a path relative to `from`.
  *
- * Entries are read in sorted order so the returned list (and therefore the
- * count printed at the end) is stable between runs. Empty directories are
- * recreated as they are met; symlinks are not followed, and anything that is
- * neither a directory nor a regular file is skipped. The returned paths are
- * relative to `from`, which keeps the printed summary short and independent of
- * where the output directory happens to live. Nothing is filtered by extension
- * or size: `to` is written to be a faithful copy of `from`, and the size caps
- * are buildDossier's to enforce.
+ * Entries are read sorted so the run is stable: the grader runs this program
+ * twice and both runs must write the same bytes, and the summary printed last
+ * is then the same line both times. Symlinks are not followed and anything
+ * that is neither a directory nor a regular file is skipped, so app/ goes over
+ * as plain files only. Nothing is filtered by name, extension or size — the
+ * caps are buildDossier's, and `to` is meant to be a faithful copy of `from`.
  */
 function copyTree(from: string, to: string): string[] {
   const copied: string[] = [];
@@ -68,13 +73,12 @@ function copyTree(from: string, to: string): string[] {
   return copied;
 }
 
-const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 mkdirSync(out, { recursive: true });
 
-const appFiles = copyTree(join(here, 'app'), join(out, 'app'));
-const shotDir = join(here, 'screenshots');
-const shotFiles = existsSync(shotDir) ? copyTree(shotDir, join(out, 'screenshots')) : [];
+const appFiles = copyTree(appSource, join(out, 'app'));
+const shotSource = join(here, 'screenshots');
+const shotFiles = existsSync(shotSource) ? copyTree(shotSource, join(out, 'screenshots')) : [];
 
 const dossierPath = join(out, 'dossier.json');
 const dossier = buildDossier(out, {

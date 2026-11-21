@@ -1,15 +1,15 @@
 {
   "game": "Grand Theft Auto VI",
   "platform": "PlayStation 5",
-  "list": "The official 55-trophy PlayStation 5 list: 1 platinum, 2 gold, 6 silver, 46 bronze, 28 hidden on PSN until earned. Names, descriptions and grades appear exactly as PlayStation publishes them, as Exophase and PSNProfiles list them; the two agree on all 55.",
-  "method": "CONFIRMED means the official trophy description itself states the requirement — the mission, the chapter, or the count. EXPECTED means the description names the goal but not the route, so the method is reasoned from the description plus GTA V / GTA Online precedent and what the two GTA VI trailers show; it has not been checked in the retail game, because the list was published before launch. Each guide names its sources, and each number it quotes (42 Shooting Range challenges, 14 drone race locations, 18 meditation spots, 52 areas, 100 vehicles, 100 WAiNK locations, 250 stunts, 500 choices, 8 strands, 9 gangs, 8 garages, 10 registered vehicles) is the target PSN itself tracks.",
+  "list": "The official 55-trophy PlayStation 5 list: 1 platinum, 2 gold, 6 silver, 46 bronze, and 28 hidden until earned. Every name, description and grade here is reproduced as PlayStation publishes it, as Exophase and PSNProfiles both list it; the two agree on all 55.",
+  "method": "CONFIRMED means the official trophy description itself names the requirement — the mission, the chapter, or the count — so the guide only has to explain how to reach the thing it names. EXPECTED means the description names the goal but stops short of the route, so the method is reasoned from the description plus GTA V / GTA Online precedent and what the two GTA VI trailers show. The list was published before launch, so nothing here has been played and checked in the retail game, and the guides say so. Every number quoted in a guide (42 Shooting Range challenges, 14 drone race locations, 18 meditation spots, 52 areas, 100 vehicles, 100 WAiNK locations, 250 stunts, 500 choices, 8 strands, 9 gangs, 8 garages, 10 registered vehicles) is a target PSN itself tracks.",
   "sources": {
     "exophase": "Exophase — GTA VI trophy list: official names, descriptions and grades — https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/",
     "psnprofiles": "PSNProfiles — GTA VI trophies: grades and the PSN progress targets — https://psnprofiles.com/trophies/43531-grand-theft-auto-vi",
     "official": "Rockstar Games — GTA VI official site: https://www.rockstargames.com/VI",
     "trailer1": "Rockstar Games — GTA VI Trailer 1 (December 2023): the first look at Vice City and Leonida",
-    "trailer2": "Rockstar Games — GTA VI Trailer 2 (May 2025): Lucia and Jason, Leonida's locations and the activities shown on screen",
-    "series": "GTA V / GTA Online — series precedent (mission replay and checkpoints, wanted levels, properties, collectibles, app-based services) used to work out the route where the description stops short"
+    "trailer2": "Rockstar Games — GTA VI Trailer 2 (May 2025): Lucia and Jason, Leonida's locations, and the activities shown on screen",
+    "series": "GTA V / GTA Online — series precedent (mission replay and checkpoints, wanted levels, properties, collectibles, app-based services), used to work out the route wherever a description stops short"
   },
   "trophies": [
     {
@@ -22,13 +22,13 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "Nothing to do here in isolation: the platinum is simply the reward for the other 54, and the official text only crowns you a Leonida Legend. So the way to earn it is to plan everything else, which is what the roadmap in this atlas is for. Story first, because it unlocks the map, the contacts and the venues; the stranger strands while their markers are up; the skill checks whenever you want a change of pace; the robberies ahead of the shopping, so the Marked Bills are already banked; one long map sweep for the collectibles, the meditation spots and the WAiNK check-ins; then the money, the properties and the counters. A Long Road is the last gold for most players and the platinum lands seconds behind it. Only five trophies on the list are missable, so a late start costs time rather than anything permanent.",
+      "guide": "Nothing stands behind the platinum on its own: it is the award for the other 54, and PlayStation's text only crowns you a Leonida Legend for collecting them. So the way to earn it is to plan the rest, which is what this atlas's roadmap is for. Play the story first, because it opens the map, the contacts and the venues every other trophy leans on. Take the stranger strands while their markers are up. Do the skill checks whenever you want a break from missions. Rob before you shop, so the Marked Bills are already banked. Then make one long sweep for the collectibles, the meditation spots and the WAiNK check-ins, and leave the money, the properties and the long counters for the tail. A Long Road is the 54th trophy for most players and this one lands a moment behind it. Only five trophies on the list can be missed, so a late start costs hours rather than a replay.",
       "steps": [
-        "Play Chapters 1–4 and the final mission, clearing the Before the Finale checklist before the finale.",
+        "Play Chapters 1–4 and the final mission, clearing the Before the Finale checklist first.",
         "Finish all eight stranger strands and the 9 activity types.",
         "Clear the heists and robberies, then the collectibles and the map sweep.",
-        "Let the counters (250 stunts, 50 challenges, 500 choices, 100 vehicles) finish, then close A Long Road out for 100%.",
-        "The platinum pops on the 54th trophy — watch the counter in the header."
+        "Let the counters (250 stunts, 50 challenges, 500 choices, 100 vehicles) run out, then close A Long Road for 100%.",
+        "The platinum pops on the 54th trophy — the header counter in this tracker shows how close you are."
       ],
       "sources": ["exophase", "psnprofiles"]
     },
@@ -42,10 +42,10 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "The first trophy nearly everyone earns, because it belongs to the opening mission and the opening mission cannot be skipped. Gone Fishing is the job Lucia and Jason take together early on — Trailer 2 is where the pair, and the state of Leonida around them, are introduced — and the description asks for exactly one thing: complete it. Follow the markers, do what the objectives ask, and the trophy arrives at the mission-pass screen. There is no preparation to do and no failure that survives: a botched section restarts from a checkpoint a few seconds back, the way GTA V handled a failed mission.",
+      "guide": "The trophy nearly everyone earns first, because it belongs to Gone Fishing — the opening job Lucia and Jason take together, and an opening no one can skip. Trailer 2 is where the pair, and the state of Leonida around them, are introduced. The requirement is exactly what the description says and no more: complete the mission. Follow the markers, do what each objective asks, and the trophy arrives on the mission-pass screen. There is nothing to prepare and nothing that can be lost for good: a botched section restarts from a checkpoint a few seconds back, the way GTA V handled a failed mission.",
       "steps": [
-        "Begin a new game and play through the opening mission, Gone Fishing.",
-        "Work the objectives in the order the game sets them; use the mission markers.",
+        "Start a new game and play the opening mission, Gone Fishing.",
+        "Work the objectives in the order the game sets them, using the mission markers.",
         "Finish the mission — the trophy pops at the pass screen."
       ],
       "sources": ["exophase", "trailer2"]
@@ -60,7 +60,7 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "Chapter 1 is the opening stretch: Lucia back in Vice City, the first work alongside Jason, and the contacts who will hand out the rest of the story. The description asks for the whole chapter, so play its missions in the order they unlock and finish its finale — the trophy appears on the chapter-complete screen. Chapter trophies cannot be routed around or lost. A mission you fail restarts at a checkpoint, and since GTA V the series has offered to skip a section after repeated failures, so a hard mission delays the chapter rather than blocking it. Sweep the map when the chapter closes, because new icons tend to appear at that moment.",
+      "guide": "Chapter 1 is the opening stretch: Lucia back in Vice City, the first work alongside Jason, and the contacts who will hand out the rest of the story. The description asks for the whole chapter, so play its missions in the order they unlock and finish its closing job — the trophy appears on the chapter-complete screen. A chapter trophy cannot be routed around or lost. A mission you fail restarts at a checkpoint, and since GTA V the series has offered to skip a section after repeated failures, so a hard mission delays the chapter rather than blocking it. Sweep the map once the chapter closes, because new icons tend to appear at exactly that moment.",
       "steps": [
         "Play every Chapter 1 mission as it unlocks, in story order.",
         "Finish the chapter's closing mission.",
@@ -78,11 +78,11 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "The censored title is PlayStation's own, so it is reproduced here exactly as published. The requirement is the plain one: finish Chapter 2 — its missions in order, then its finale, with the trophy on the chapter-complete screen. Story-wise this is the stretch where the drug money of the title starts moving through the plot, and it is usually the point at which the first stranger markers and side strands open up. So after the chapter-complete screen, spend five minutes looking at what the map has added before pushing on into Chapter 3. Nothing here can be missed.",
+      "guide": "The censored title is PlayStation's own, so it is reproduced here exactly as published. The requirement is the plain one: finish Chapter 2 — its missions in order, then its finale, with the trophy landing on the chapter-complete screen. Story-wise this is the stretch where the drug money of the title starts moving through the plot, and it is usually the point where the first stranger markers and side strands open up. So after the chapter-complete screen, spend five minutes on the map working out what it has just added before pushing into Chapter 3. Nothing here can be missed.",
       "steps": [
         "Play every Chapter 2 mission in order.",
         "Finish the chapter finale.",
-        "Sweep the map for the stranger markers the chapter just unlocked.",
+        "Sweep the map for the stranger markers the chapter has just unlocked.",
         "The trophy pops at the chapter-complete screen."
       ],
       "sources": ["exophase", "psnprofiles"]
@@ -97,10 +97,10 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "Chapter 3 is where the story settles into Vice City itself — the beaches, the strip and the nightlife that Trailer 2 leans on hardest — and it is usually where the bigger heist setups begin to appear, the ones the later chapters pay off. Play the chapter's missions in order, finish its finale, and the trophy appears with the chapter-complete screen. Keep an eye on the venues and contacts the chapter opens as you go: those are the doors into the activity trophies (the shooting range, the races, the drone courses) that the roadmap schedules after the story.",
+      "guide": "Chapter 3 is where the plot settles into Vice City itself — the beaches, the strip and the nightlife that Trailer 2 leans on hardest — and it is usually where the bigger heist setups begin, the ones the later chapters pay off. Play the chapter's missions in order, finish its finale, and the trophy appears with the chapter-complete screen. Keep notes on the venues and contacts the chapter opens as you go: those are the doors into the activity trophies (the shooting range, the races, the drone courses) that the roadmap schedules after the story.",
       "steps": [
         "Play every Chapter 3 mission in order.",
-        "Note the new contacts, venues and markers the chapter opens.",
+        "Note the contacts, venues and markers the chapter opens.",
         "Finish the chapter finale — the trophy pops at the chapter-complete screen."
       ],
       "sources": ["exophase", "trailer2"]
@@ -115,7 +115,7 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "The last chapter trophy before the ending, and the one to slow down for. Chapter 4 holds the biggest jobs in the game — the largest payouts, the heaviest resistance — and it sets the final mission up directly. Play its missions in order and finish the finale for the trophy. What matters is what you do next: before touching the final mission, work the Before the Finale checklist in this atlas. Two trophies need your partner standing beside you in free roam, and no official source says who is still around once the story is over.",
+      "guide": "The last chapter trophy before the ending, and the one to slow down for. Chapter 4 holds the biggest jobs in the game — the largest payouts, the heaviest resistance — and it feeds the final mission directly. Play its missions in order and finish the finale for the trophy. What matters is what you do next: before touching the final mission, work the Before the Finale checklist in this atlas. Two trophies need your partner standing beside you in free roam, and no official source says who is still around once the story is over.",
       "steps": [
         "Play every Chapter 4 mission in order.",
         "Finish the chapter finale for the trophy.",
@@ -137,7 +137,7 @@
       "steps": [
         "Before the finale: earn Hot Together and Retail Therapy with your partner in free roam.",
         "Clear Cal's fishing challenge and Bret's hunt if they are still open.",
-        "Save in a new slot, then play the final mission through — the gold pops at the pass screen."
+        "Save in a new slot, then play the final mission — the gold pops at the pass screen."
       ],
       "sources": ["exophase", "series"]
     },
@@ -151,7 +151,7 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "A named-mission trophy with no trick to it: play Breakfast Run when the story offers it and finish it. The mission sits early, in the stretch where Lucia and Jason are still working out whether they can rely on each other — the partnership Trailer 2 puts at the centre of the game — and the trophy's title is that theme rather than a hint at a hidden condition. Follow the markers, complete each objective, and the trophy lands at the mission-pass screen. Fail a section and the checkpoint returns you a few seconds back, not to the beginning.",
+      "guide": "A named-mission trophy with no trick in it: play Breakfast Run when the story offers it and finish it. The mission sits early, in the stretch where Lucia and Jason are still finding out whether they can rely on each other — the partnership Trailer 2 puts at the centre of the game — and the trophy's title is that theme rather than a hint at a hidden condition. Follow the markers, complete each objective, and the trophy lands at the mission-pass screen. Fail a section and the checkpoint puts you a few seconds back, not at the beginning.",
       "steps": [
         "Play the story until Breakfast Run appears.",
         "Complete its objectives in order, using the markers.",
@@ -169,10 +169,10 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "The first of the game's big set-piece heists, and the description asks only that you finish it. GTA V established the shape these take: a planning stage, a handful of setup missions that belong to the chain rather than being optional, then the job with a crew and a loud exit. Do the setups as they appear, buy armour and full rifle ammo before the final run, and keep a fast car in mind for the escape instead of hoping to find one outside. The trophy pops at the pass screen. Heist payouts also supply a large share of the Marked Bills the laundering trophy needs, so bank them rather than spending them.",
+      "guide": "The first of the game's big set-piece heists, and the description asks only that you finish it. GTA V set the shape these take: a planning stage, a handful of setup missions that belong to the chain rather than being optional, then the job itself with a crew and a loud exit. Do the setups as they appear, buy armour and full rifle ammo before the final run, and have a fast car in mind for the escape instead of hoping to find one outside. The trophy pops at the pass screen. Heist payouts also supply a large share of the Marked Bills the laundering trophy needs, so bank them rather than spending them.",
       "steps": [
-        "Play the story until The Cartel Heist unlocks and finish its setup missions first.",
-        "Stock armour and ammo before the heist itself.",
+        "Play the story until The Cartel Heist unlocks, and finish its setup missions first.",
+        "Stock armour and ammunition before the heist itself.",
         "Complete the heist — the trophy pops at the mission-pass screen."
       ],
       "sources": ["exophase", "series"]
@@ -187,7 +187,7 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "A named-mission trophy: complete Child's Play when the story flow offers it and the trophy lands at the pass screen. Both the mission name and the trophy name point at the domestic side of the plot — a job tangled up with a relative or a contact's family, the kind of mission the series has used since GTA IV to break up the crime beats. There is no hidden condition beyond finishing it, so work the markers and the objectives as they come. If a section beats you, the checkpoint retry brings you back within seconds instead of restarting the mission.",
+      "guide": "A named-mission trophy: complete Child's Play when the story flow offers it and the trophy lands at the pass screen. Both the mission name and the trophy name point at the domestic side of the plot — a job tangled up with a relative or a contact's family, the sort of mission the series has used since GTA IV to break up the crime beats. There is no hidden condition beyond finishing it, so work the markers and the objectives as they come. If a section beats you, the checkpoint retry brings you back within seconds rather than restarting the whole mission.",
       "steps": [
         "Play the story until Child's Play unlocks.",
         "Complete its objectives in order, following the markers.",
@@ -223,7 +223,7 @@
       "missable": false,
       "status": "confirmed",
       "count": null,
-      "guide": "VCIA is Vice City International Airport, and the trophy's pun gives the job away: a hijacking, most likely of a vehicle or an aircraft, on the runways or among the cargo buildings. Expect a driving section and a firefight, so bring armour and rifle ammo and keep a clear head about where the exits are. Finish the mission and the trophy appears at the pass screen. Worth noting for later: the airport is also the setting for the free-roam trophy Catch Me If You Can, so learn the runway layout now and that one takes a minute when you return.",
+      "guide": "VCIA is Vice City International Airport, and the trophy's pun gives the job away: a hijacking, most likely of a vehicle or an aircraft, on the runways or among the cargo buildings. Expect a driving section and a firefight, so bring armour and rifle ammo and think about where the exits are before you need one. Finish the mission and the trophy appears at the pass screen. Worth noting for later: the airport is also the setting for the free-roam trophy Catch Me If You Can, so learn the runway layout now and that one takes a minute when you come back.",
       "steps": [
         "Play the story until VCIA Takedown unlocks.",
         "Bring armour and ammo — expect driving and a firefight around the airport.",
@@ -264,7 +264,7 @@
       "steps": [
         "Finish the story and all eight stranger strands.",
         "Complete every collectible set and activity count the other trophies name.",
-        "Open the in-game 100% checklist (the stats menu) and clear what it still lists.",
+        "Open the in-game 100% checklist (the stats menu) and clear whatever it still lists.",
         "The gold pops when the checklist reads 100% — then the platinum follows."
       ],
       "sources": ["exophase", "series"]

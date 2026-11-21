@@ -1,47 +1,43 @@
-/* Leonida Trophy Atlas — the whole look, drawn from scratch in CSS.
-   Palette: a Vice City evening — deep teal night sky, coral sunset, amber
-   streetlight on warm paper. No images and no fonts are loaded: type, colour,
-   spacing and borders only, so the first load is three small files.
+/* Leonida Trophy Atlas — the whole look, drawn in CSS alone.
+   The palette is a Vice City evening: deep teal night, coral sunset, amber
+   streetlight on warm paper. No image and no font is loaded, so the first
+   load stays at three small files.
 
-   The variables below are the only source of colour in the stylesheet; every
-   rule reads from them, so the theme is changed in this one block. They fall
-   into five groups: ink and paper (the two everything else is read against),
-   the evening hues used for chrome and accents, one colour per trophy grade,
-   the warning/success pairs for missables and earned rows, and two shape
-   tokens (radius, shadow) that keep the cards looking like one family.
-   Change a value here rather than in a rule: a stray hex outside :root is the
-   one thing that makes the palette drift. */
-
+   Every colour the page uses is declared once in :root below and read from
+   there; a hex written outside this block is how a palette drifts. The tokens
+   come in five groups: the two surfaces everything is read against (ink and
+   paper), the evening hues that carry the chrome and the accent text, one
+   colour per trophy grade for the pills, the warning and success pair that
+   marks a missable and an earned row, and the two shape tokens that keep the
+   panels looking like one family. */
 
 :root {
-  /* Ink and paper first: everything else is read against these two. */
+  /* Surfaces: paper behind everything, card for the panels on it. */
   --ink: #16211f;
   --ink-soft: #46544f;
   --paper: #fdf8f0;
   --card: #fffefb;
   --line: #e2d7c8;
   --line-soft: #efe7db;
-  /* The Vice City evening, in the order the eye meets it: teal night, coral
-     sunset, amber streetlight. --teal-deep is the same hue one step down, for
-     hover states and the header bar. */
+  /* The evening, in the order the eye meets it. --teal-deep is the same hue
+     one step down, for the header and for hover text. */
   --teal: #0f4f49;
   --teal-deep: #08302c;
   --coral: #dd5327;
   --amber: #f2a104;
-  /* One colour per trophy grade, used by the grade pills and nothing else, so
-     the four grades stay recognisable wherever they appear. */
+  /* One colour a grade, used by the pills and nothing else. */
   --gold: #a8760a;
   --silver: #5c6b73;
   --bronze: #8a5628;
   --platinum: #14708f;
-  /* Warning (missable) and success (earned) pairs: a tinted background with a
-     matching border and a dark ink that still passes contrast on the tint. */
+  /* Missable (warn) and earned (ok): a tint, its border and an ink that still
+     passes contrast on that tint. */
   --warn-bg: #fdeae6;
   --warn-line: #f0bcb2;
   --warn-ink: #8c1c10;
   --ok: #1b7a4c;
   --ok-bg: #eff7f2;
-  /* Shape: one radius and one shadow, reused so cards look like one family. */
+  /* Shape: one radius and one shadow, reused so the panels read as one set. */
   --radius: 10px;
   --shadow: 0 1px 2px rgba(22, 33, 31, .06);
 }
@@ -91,7 +87,7 @@ body {
 .pct { margin: 0; font-size: 13px; color: #e9f3f0; }
 .grades { margin: 3px 0 0; font-size: 12.5px; color: #b9d2cc; }
 
-/* ---- tabs ---- */
+/* ---- view tabs ---- */
 .tabs { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 28px 0; }
 .tabs button {
   border: 1px solid var(--line); border-bottom: none;
@@ -131,7 +127,7 @@ body {
 }
 .controls .check input { width: 17px; height: 17px; accent-color: var(--teal); }
 
-/* ---- layout ---- */
+/* ---- page frame ---- */
 main { max-width: 1460px; margin: 0 auto; padding: 16px 28px 30px; }
 .hint { margin: 0 0 12px; font-size: 13.5px; color: var(--ink-soft); }
 .layout { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 18px; align-items: start; }
@@ -157,6 +153,7 @@ main { max-width: 1460px; margin: 0 auto; padding: 16px 28px 30px; }
 .desc { margin: 3px 0 0 26px; font-size: 13.5px; color: var(--ink-soft); }
 .meta { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 0 26px; }
 
+/* Pills carry the grade; tags carry the rest of a trophy's facts. */
 .pill, .tag {
   display: inline-block; padding: 2px 8px; border-radius: 999px;
   font-size: 11.5px; font-weight: 700; letter-spacing: .3px;
@@ -203,7 +200,7 @@ main { max-width: 1460px; margin: 0 auto; padding: 16px 28px 30px; }
 }
 .earnedNote { color: var(--ok); font-weight: 600; }
 
-/* ---- views ---- */
+/* ---- the four views ---- */
 .view h2 { margin: 4px 0 6px; font-size: 23px; }
 .view h3 { margin: 22px 0 6px; font-size: 18px; }
 .lede { max-width: 900px; margin: 0 0 16px; font-size: 15.5px; color: var(--ink-soft); }
@@ -218,7 +215,7 @@ main { max-width: 1460px; margin: 0 auto; padding: 16px 28px 30px; }
 .alert strong { display: block; margin-bottom: 3px; }
 
 /* ---- roadmap ---- */
-/* At-a-glance strip: every phase, its hours and its progress in one row. */
+/* The at-a-glance strip: every phase, its hours and its progress in one row. */
 .phaseTimes {
   list-style: none; margin: 0 0 14px; padding: 0;
   display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px;
@@ -260,9 +257,9 @@ main { max-width: 1460px; margin: 0 auto; padding: 16px 28px 30px; }
 .tlist li.done { background: #e2f2e8; color: var(--ok); }
 .count { font-size: 12.5px; font-weight: 700; color: var(--teal); white-space: nowrap; text-align: right; }
 
-/* ---- missables / finale ---- */
-/* Two columns so the partner warning, the five missables and the tickable
-   finale checklist can all be read together instead of one after another. */
+/* ---- missables and finale prep ---- */
+/* Two columns, so the partner warning, the five missables and the tickable
+   finale list are read side by side rather than one after the other. */
 .mgrid {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 20px; align-items: start;
