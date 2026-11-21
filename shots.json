@@ -1,33 +1,38 @@
 [
-  { "file": "1-checklist-guide.jpg",
-    "comment": "The main view: the list at 40% with the Shootist guide beside it.",
-    "note": "The checklist with the Shootist guide open: rich guide text, numbered steps and the SOURCES block legible beside the list, progress at 40%.",
+  {
+    "file": "1-checklist-guide.jpg",
+    "comment": "Main view: the list at 40%, Shootist guide open beside it.",
+    "note": "Checklist view with the Shootist guide selected and open — full guide prose, numbered steps and the SOURCES block readable next to the list, header progress at 40%.",
     "path": "/",
     "viewport": { "width": 1280, "height": 800 },
     "scale": 1,
-    "encoding": "jpeg quality 82" },
-
-  { "file": "2-roadmap.jpg",
-    "comment": "Phase plan: six phases, hour estimates and live done-counts.",
-    "note": "Roadmap to the platinum: six phases with hour estimates, chapter and mission mapping, and a live done-count per phase.",
+    "encoding": "jpeg quality 82"
+  },
+  {
+    "file": "2-roadmap.jpg",
+    "comment": "Phase plan: six phases, hour estimates, live done-counts per phase.",
+    "note": "Roadmap view: all six phases, each with its hour estimate, the chapters and missions it maps to, and a done-count that tracks the ticks.",
     "path": "/roadmap",
     "viewport": { "width": 1280, "height": 800 },
     "scale": 1,
-    "encoding": "jpeg quality 82" },
-
-  { "file": "3-missables.jpg",
-    "comment": "Timing-critical set: banner, five trophies, finale checklist.",
-    "note": "Missables view: the five timing-critical trophies, the red partner warning banner and the tickable Before the Finale checklist.",
+    "encoding": "jpeg quality 82"
+  },
+  {
+    "file": "3-missables.jpg",
+    "comment": "Timing-critical set: red partner banner, five trophies, finale list.",
+    "note": "Missables view: the five trophies that need the right moment, the red banner warning about the partner trophies, and the tickable Before the Finale list.",
     "path": "/missables",
     "viewport": { "width": 1280, "height": 800 },
     "scale": 1,
-    "encoding": "jpeg quality 82" },
-
-  { "file": "4-spoilers.jpg",
-    "comment": "Spoiler mode on: unearned story trophies become placeholders.",
-    "note": "Spoiler setting ticked: unearned story trophies show no name, description or guide.",
+    "encoding": "jpeg quality 82"
+  },
+  {
+    "file": "4-spoilers.jpg",
+    "comment": "Spoiler mode ticked: unearned story trophies become placeholders.",
+    "note": "With the spoiler setting ticked, story trophies you have not earned reveal no name, no description and no guide text.",
     "path": "/spoilers",
     "viewport": { "width": 1280, "height": 800 },
     "scale": 1,
-    "encoding": "jpeg quality 82" }
+    "encoding": "jpeg quality 82"
+  }
 ]

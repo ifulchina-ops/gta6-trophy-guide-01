@@ -1,144 +1,309 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leonida Trophy Atlas — GTA VI Trophy Guide and Tracker</title>
-<meta name="description" content="An offline guide and tracker for all 55 Grand Theft Auto VI trophies: sourced step-by-step guides, a timed roadmap to the platinum, every missable flagged, and progress saved in the browser.">
-<meta name="color-scheme" content="light">
-<link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+    <title>Leonida Trophy Atlas — GTA VI Trophy Guide and Tracker</title>
+    <meta
+        name="description"
+        content="An offline guide and tracker for all 55 Grand Theft Auto VI trophies: sourced
+                 step-by-step guides, a timed roadmap to the platinum, every missable flagged,
+                 and progress saved in the browser.">
+    <meta
+        name="color-scheme"
+        content="light">
+    <link
+        rel="stylesheet"
+        href="style.css">
 </head>
 <body>
-<!-- The shell, in the order a reader meets it. Header: the brand and the
-     live progress box (earned count, platinum bar, percent, per-grade line),
-     which is role="status" so a tick is spoken as well as drawn. Then the
-     four view buttons, the only way a view is switched. Then the controls
-     row, which filters the checklist alone. Then the four view sections, of
-     which exactly one carries no hidden attribute at a time. Everything
-     below starts empty: app.js fills it from data/trophies.json. -->
-<a class="skip" href="#main">Skip to the guide</a>
+
+<!-- Shell layout, in the sequence a reader walks through it.
+     Header first: the brand plus the live progress box — earned count,
+     platinum bar, percent, per-grade line — and that box carries
+     role="status" so a tick is spoken out loud as well as painted. Next
+     the four view buttons, the sole means of switching views. Then the
+     controls row, which narrows the checklist alone. Last the four view
+     sections, exactly one of which is without a hidden attribute at any
+     time. All of them arrive empty; app.js fills them from
+     data/trophies.json. -->
+
+<a
+    class="skip"
+    href="#main">Skip to the guide</a>
 
 <header class="top">
-  <div class="brand">
-    <div class="mark" aria-hidden="true">VI</div>
-    <div class="brandText">
-      <h1>Leonida Trophy Atlas</h1>
-      <p class="sub">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies &middot; 1 platinum &middot; 2 gold &middot; 6 silver &middot; 46 bronze &middot; 28 hidden</p>
+    <div class="brand">
+        <div
+            class="mark"
+            aria-hidden="true">VI</div>
+        <div class="brandText">
+            <h1>Leonida Trophy Atlas</h1>
+            <p class="sub">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies &middot; 1 platinum
+                &middot; 2 gold &middot; 6 silver &middot; 46 bronze &middot; 28 hidden</p>
+        </div>
     </div>
-  </div>
-  <div class="progress" id="progressBox" role="status" aria-live="polite">
-    <p class="big"><span id="earnedCount">0</span><span class="of">/ 55 earned</span></p>
-    <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
-    <p class="pct" id="pctLine">0% to the platinum</p>
-    <p class="grades" id="gradeLine"></p>
-  </div>
+    <div
+        class="progress"
+        id="progressBox"
+        role="status"
+        aria-live="polite">
+        <p class="big"><span id="earnedCount">0</span><span class="of">/ 55 earned</span></p>
+        <div
+            class="bar"
+            aria-hidden="true"><div id="barFill"></div></div>
+        <p
+            class="pct"
+            id="pctLine">0% to the platinum</p>
+        <p
+            class="grades"
+            id="gradeLine"></p>
+    </div>
 </header>
 
-<nav class="tabs" aria-label="Guide sections">
-  <button type="button" data-view="checklist" class="active" aria-current="page">Checklist</button>
-  <button type="button" data-view="roadmap">Roadmap to Platinum</button>
-  <button type="button" data-view="missables">Missables &amp; Finale Prep</button>
-  <button type="button" data-view="sources">Sources &amp; Method</button>
+<nav
+    class="tabs"
+    aria-label="Guide sections">
+    <button
+        class="active"
+        type="button"
+        data-view="checklist"
+        aria-current="page">Checklist</button>
+    <button
+        type="button"
+        data-view="roadmap">Roadmap to Platinum</button>
+    <button
+        type="button"
+        data-view="missables">Missables &amp; Finale Prep</button>
+    <button
+        type="button"
+        data-view="sources">Sources &amp; Method</button>
 </nav>
 
-<section class="controls" aria-label="Search and filters">
-  <label class="search">Search
-    <input id="search" type="search" placeholder="Trophy name, mission, app or keyword…" autocomplete="off">
-  </label>
-  <label>Grade
-    <select id="grade">
-      <option value="all">All grades</option>
-      <option value="platinum">Platinum</option>
-      <option value="gold">Gold</option>
-      <option value="silver">Silver</option>
-      <option value="bronze">Bronze</option>
-    </select>
-  </label>
-  <label>Kind
-    <select id="kind">
-      <option value="all">All kinds</option>
-      <option value="story">Story</option>
-      <option value="side">Side strands</option>
-      <option value="collectible">Collectibles</option>
-      <option value="activity">Activities</option>
-      <option value="combat">Combat &amp; heists</option>
-      <option value="exploration">Exploration</option>
-      <option value="economy">Money &amp; property</option>
-      <option value="misc">Odd &amp; rare</option>
-    </select>
-  </label>
-  <label>Status
-    <select id="status">
-      <option value="all">All trophies</option>
-      <option value="remaining">Not yet earned</option>
-      <option value="earned">Earned</option>
-      <option value="missable">Missable only</option>
-    </select>
-  </label>
-  <label class="check" for="spoilers"><input id="spoilers" type="checkbox"> Hide story spoilers</label>
+<section
+    class="controls"
+    aria-label="Search and filters">
+    <label class="search">Search
+        <input
+            id="search"
+            type="search"
+            placeholder="Trophy name, mission, app or keyword…"
+            autocomplete="off">
+    </label>
+    <label>Grade
+        <select id="grade">
+            <option value="all">
+                All grades
+            </option>
+            <option value="platinum">
+                Platinum
+            </option>
+            <option value="gold">
+                Gold
+            </option>
+            <option value="silver">
+                Silver
+            </option>
+            <option value="bronze">
+                Bronze
+            </option>
+        </select>
+    </label>
+    <label>Kind
+        <select id="kind">
+            <option value="all">
+                All kinds
+            </option>
+            <option value="story">
+                Story
+            </option>
+            <option value="side">
+                Side strands
+            </option>
+            <option value="collectible">
+                Collectibles
+            </option>
+            <option value="activity">
+                Activities
+            </option>
+            <option value="combat">
+                Combat &amp; heists
+            </option>
+            <option value="exploration">
+                Exploration
+            </option>
+            <option value="economy">
+                Money &amp; property
+            </option>
+            <option value="misc">
+                Odd &amp; rare
+            </option>
+        </select>
+    </label>
+    <label>Status
+        <select id="status">
+            <option value="all">
+                All trophies
+            </option>
+            <option value="remaining">
+                Not yet earned
+            </option>
+            <option value="earned">
+                Earned
+            </option>
+            <option value="missable">
+                Missable only
+            </option>
+        </select>
+    </label>
+    <label
+        class="check"
+        for="spoilers"><input
+            id="spoilers"
+            type="checkbox"> Hide story spoilers</label>
 </section>
 
 <main id="main">
-  <section id="view-checklist" class="view" aria-label="Trophy checklist">
-    <p class="hint" id="countLine"></p>
-    <div class="layout">
-      <ul class="cards" id="cards"></ul>
-      <aside class="detail" id="detail" aria-live="polite" aria-label="Trophy guide"></aside>
-    </div>
-  </section>
 
-  <section id="view-roadmap" class="view" aria-label="Roadmap to the platinum" hidden>
-    <h2>Roadmap to the platinum</h2>
-    <p class="lede">Play in this order. The story first — it opens the map, the contacts and the activities the other trophies hang off — then the stranger strands while their markers are up, then the skill checks, then the robberies, then one long map sweep, then the money and the counters. The times are first-playthrough estimates; the story is two thirds of the run and the counts are the tail.</p>
-    <ol class="phaseTimes" id="phaseTimes" aria-label="Phase times at a glance"></ol>
-    <ol class="phases" id="phases"></ol>
-    <p class="note">Each phase lists the chapters and missions it covers, the trophies it earns and how many of them are already ticked. The platinum pops the moment the other 54 are earned — there is no separate task behind it.</p>
-  </section>
+    <section
+        id="view-checklist"
+        class="view"
+        aria-label="Trophy checklist">
+        <p
+            class="hint"
+            id="countLine"></p>
+        <div class="layout">
+            <ul
+                class="cards"
+                id="cards"></ul>
+            <aside
+                class="detail"
+                id="detail"
+                aria-live="polite"
+                aria-label="Trophy guide"></aside>
+        </div>
+    </section>
 
-  <section id="view-missables" class="view" aria-label="Missable trophies and finale preparation" hidden>
-    <h2>Missables &amp; finale prep</h2>
-    <p class="lede">Five trophies need the right moment. Everything else waits for you: missions replay, collectibles stay in the world, and every count is cumulative.</p>
-    <div class="alert" role="alert">
-      <strong>Do the partner trophies before the final mission.</strong>
-      Hot Together and Retail Therapy both need your partner beside you in free roam, and no official source says who is still available after the ending. Treat the checklist below as your pre-finale save point.
-    </div>
-    <div class="mgrid">
-      <ul class="cards" id="missableCards"></ul>
-      <div class="finaleBlock">
-        <h3>Before the finale — do these first</h3>
-        <p class="lede">Tick each one as you finish it. The ticks are saved in this browser beside your trophy progress, so they survive a reload.</p>
-        <ul class="finale" id="finaleList"></ul>
-      </div>
-    </div>
-    <p class="note">The other missables are one-chance moments inside a strand: take Cal's fishing challenge the moment he offers it, never shoot Bret's unique animal before his hunt begins, and treat a spotted jewelry robbery as failed and start it again clean.</p>
-  </section>
+    <section
+        id="view-roadmap"
+        class="view"
+        aria-label="Roadmap to the platinum"
+        hidden>
+        <h2>Roadmap to the platinum</h2>
+        <p class="lede">Play in this order. The story first — it opens the map, the contacts and the
+            activities the other trophies hang off — then the stranger strands while their markers are
+            up, then the skill checks, then the robberies, then one long map sweep, then the money and
+            the counters. The times are first-playthrough estimates; the story is two thirds of the run
+            and the counts are the tail.</p>
+        <ol
+            class="phaseTimes"
+            id="phaseTimes"
+            aria-label="Phase times at a glance"></ol>
+        <ol
+            class="phases"
+            id="phases"></ol>
+        <p class="note">Each phase lists the chapters and missions it covers, the trophies it earns and
+            how many of them are already ticked. The platinum pops the moment the other 54 are earned —
+            there is no separate task behind it.</p>
+    </section>
 
-  <section id="view-sources" class="view" aria-label="Sources and method" hidden>
-    <h2>Sources &amp; method</h2>
-    <p class="lede">Every name, description and grade below is the official PlayStation 5 list as Exophase and PSNProfiles publish it. Every guide is written for this atlas; sources are cited, never copied.</p>
-    <dl class="srcdl">
-      <dt>What CONFIRMED means</dt>
-      <dd>The requirement is spelled out in the official trophy description itself — the mission name, the chapter, or a count. Those guides only explain how to reach the thing the description already names.</dd>
-      <dt>What EXPECTED means</dt>
-      <dd>The description names the goal but not the route, so the method is reasoned from it plus GTA V and GTA Online precedent and what the two GTA VI trailers show. The list was published before launch, so nothing here has been played and checked in the retail game. Those guides say so.</dd>
-      <dt>Where the counts come from</dt>
-      <dd>42 Shooting Range challenges, 14 drone race locations, 18 meditation spots, 52 areas, 100 vehicles, 100 WAiNK locations, 250 stunts, 500 choices, 8 strands, 9 gangs, 8 garages, 10 vehicles: each is the target PSN itself tracks, as PSNProfiles lists it. Where the official description gives no number, the guide gives none.</dd>
-    </dl>
-    <h3>Source list</h3>
-    <ul class="srclist" id="srcList"></ul>
-    <h3>How your progress is kept</h3>
-    <p class="prose">Ticks live in this browser's localStorage and are never sent anywhere. Export writes them to a JSON file you keep; import reads one back, which is how you move progress between browsers; reset clears everything after a confirmation. Nothing in this app makes a network request.</p>
-    <div class="actions">
-      <button type="button" id="export">Export progress</button>
-      <label class="importBtn" for="import">Import progress<input id="import" type="file" accept="application/json,.json"></label>
-      <button type="button" id="reset">Reset progress</button>
-    </div>
-  </section>
+    <section
+        id="view-missables"
+        class="view"
+        aria-label="Missable trophies and finale preparation"
+        hidden>
+        <h2>Missables &amp; finale prep</h2>
+        <p class="lede">Five trophies need the right moment. Everything else waits for you: missions
+            replay, collectibles stay in the world, and every count is cumulative.</p>
+        <div
+            class="alert"
+            role="alert">
+            <strong>Do the partner trophies before the final mission.</strong>
+            Hot Together and Retail Therapy both need your partner beside you in free roam, and no
+            official source says who is still available after the ending. Treat the checklist below as
+            your pre-finale save point.
+        </div>
+        <div class="mgrid">
+            <ul
+                class="cards"
+                id="missableCards"></ul>
+            <div class="finaleBlock">
+                <h3>Before the finale — do these first</h3>
+                <p class="lede">Tick each one as you finish it. The ticks are saved in this browser beside
+                    your trophy progress, so they survive a reload.</p>
+                <ul
+                    class="finale"
+                    id="finaleList"></ul>
+            </div>
+        </div>
+        <p class="note">The other missables are one-chance moments inside a strand: take Cal's fishing
+            challenge the moment he offers it, never shoot Bret's unique animal before his hunt begins,
+            and treat a spotted jewelry robbery as failed and start it again clean.</p>
+    </section>
+
+    <section
+        id="view-sources"
+        class="view"
+        aria-label="Sources and method"
+        hidden>
+        <h2>Sources &amp; method</h2>
+        <p class="lede">Every name, description and grade below is the official PlayStation 5 list as
+            Exophase and PSNProfiles publish it. Every guide is written for this atlas; sources are
+            cited, never copied.</p>
+        <dl class="srcdl">
+            <dt>What CONFIRMED means</dt>
+            <dd>The requirement is spelled out in the official trophy description itself — the mission
+                name, the chapter, or a count. Those guides only explain how to reach the thing the
+                description already names.</dd>
+            <dt>What EXPECTED means</dt>
+            <dd>The description names the goal but not the route, so the method is reasoned from it plus
+                GTA V and GTA Online precedent and what the two GTA VI trailers show. The list was
+                published before launch, so nothing here has been played and checked in the retail game.
+                Those guides say so.</dd>
+            <dt>Where the counts come from</dt>
+            <dd>42 Shooting Range challenges, 14 drone race locations, 18 meditation spots, 52 areas, 100
+                vehicles, 100 WAiNK locations, 250 stunts, 500 choices, 8 strands, 9 gangs, 8 garages, 10
+                vehicles: each is the target PSN itself tracks, as PSNProfiles lists it. Where the
+                official description gives no number, the guide gives none.</dd>
+        </dl>
+        <h3>Source list</h3>
+        <ul
+            class="srclist"
+            id="srcList"></ul>
+        <h3>How your progress is kept</h3>
+        <p class="prose">Ticks live in this browser's localStorage and are never sent anywhere. Export
+            writes them to a JSON file you keep; import reads one back, which is how you move progress
+            between browsers; reset clears everything after a confirmation. Nothing in this app makes a
+            network request.</p>
+        <div class="actions">
+            <button
+                type="button"
+                id="export">Export progress</button>
+            <label
+                class="importBtn"
+                for="import">Import progress<input
+                    id="import"
+                    type="file"
+                    accept="application/json,.json"></label>
+            <button
+                type="button"
+                id="reset">Reset progress</button>
+        </div>
+    </section>
+
 </main>
 
 <footer>
-  <p>Leonida Trophy Atlas — an unofficial fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with Rockstar Games and shows no Rockstar logo or artwork of the game. Trophy names and descriptions appear as PlayStation publishes them. Runs offline: no network requests, no accounts, no trackers.</p>
+    <p>Leonida Trophy Atlas — an unofficial fan guide. Grand Theft Auto and GTA are trademarks of
+        Take-Two Interactive; this guide is not affiliated with Rockstar Games and shows no Rockstar logo
+        or artwork of the game. Trophy names and descriptions appear as PlayStation publishes them. Runs
+        offline: no network requests, no accounts, no trackers.</p>
 </footer>
-<script type="module" src="app.js"></script>
+
+<script
+    type="module"
+    src="app.js"></script>
 </body>
 </html>
