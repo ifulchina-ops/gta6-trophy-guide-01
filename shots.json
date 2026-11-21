@@ -1,5 +1,6 @@
 [
   { "file": "1-checklist-guide.jpg",
+    "comment": "The main view: the list at 40% with the Shootist guide beside it.",
     "note": "The checklist with the Shootist guide open: rich guide text, numbered steps and the SOURCES block legible beside the list, progress at 40%.",
     "path": "/",
     "viewport": { "width": 1280, "height": 800 },
@@ -7,6 +8,7 @@
     "encoding": "jpeg quality 82" },
 
   { "file": "2-roadmap.jpg",
+    "comment": "Phase plan: six phases, hour estimates and live done-counts.",
     "note": "Roadmap to the platinum: six phases with hour estimates, chapter and mission mapping, and a live done-count per phase.",
     "path": "/roadmap",
     "viewport": { "width": 1280, "height": 800 },
@@ -14,6 +16,7 @@
     "encoding": "jpeg quality 82" },
 
   { "file": "3-missables.jpg",
+    "comment": "Timing-critical set: banner, five trophies, finale checklist.",
     "note": "Missables view: the five timing-critical trophies, the red partner warning banner and the tickable Before the Finale checklist.",
     "path": "/missables",
     "viewport": { "width": 1280, "height": 800 },
@@ -21,6 +24,7 @@
     "encoding": "jpeg quality 82" },
 
   { "file": "4-spoilers.jpg",
+    "comment": "Spoiler mode on: unearned story trophies become placeholders.",
     "note": "Spoiler setting ticked: unearned story trophies show no name, description or guide.",
     "path": "/spoilers",
     "viewport": { "width": 1280, "height": 800 },

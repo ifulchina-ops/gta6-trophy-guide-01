@@ -10,14 +10,16 @@
 </head>
 <body>
 <!-- App shell, in reading order. The header holds the brand and the live
-     progress box (earned count, platinum bar, percent line, per-grade line).
+     progress box (earned count, platinum bar, percent line, per-grade line),
+     which is role="status" so a tick is announced rather than only drawn.
      The nav below it is four buttons, one per view, and it is the only way the
      views are switched. Then the controls row, which filters the checklist
-     only. Then four <section class="view"> blocks — checklist (with its detail
-     pane beside the list), roadmap, missables and sources — of which exactly
-     one carries .is-active at a time. Every container below starts empty:
-     app.js fills them after its single fetch of data/trophies.json, so nothing
-     here hard-codes a trophy and a data edit needs no HTML change. -->
+     only — the search box, grade, kind and status selects, and the spoiler
+     switch. Then four <section class="view"> blocks — checklist (with its
+     detail pane beside the list), roadmap, missables and sources — of which
+     exactly one carries .is-active at a time. Every container below starts
+     empty: app.js fills them after its single fetch of data/trophies.json, so
+     nothing here hard-codes a trophy and a data edit needs no HTML change. -->
 <a class="skip" href="#main">Skip to the guide</a>
 
 <header class="top">

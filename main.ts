@@ -19,6 +19,11 @@
 // inline literals means a cap change is a one-line edit here. They are passed
 // straight through — this file never counts bytes or drops a screenshot itself,
 // so what the gate sees and what buildDossier enforces cannot disagree.
+//
+// Because the caps live in buildDossier, the copy above is unconditional: every
+// app file and every screenshot is handed over and the library decides what
+// fits. That way a failure is reported once, by the code the scorer runs too,
+// instead of being silently absorbed by a second opinion written here.
 
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -39,7 +44,9 @@ const APP_MAX_BYTES = 50331648;
  * recreated as they are met; symlinks are not followed, and anything that is
  * neither a directory nor a regular file is skipped. The returned paths are
  * relative to `from`, which keeps the printed summary short and independent of
- * where the output directory happens to live.
+ * where the output directory happens to live. Nothing is filtered by extension
+ * or size: `to` is written to be a faithful copy of `from`, and the size caps
+ * are buildDossier's to enforce.
  */
 function copyTree(from: string, to: string): string[] {
   const copied: string[] = [];

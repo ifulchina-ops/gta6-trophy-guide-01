@@ -4,7 +4,7 @@
 [![Rank](https://make.fun/badge/gta6-trophy-guide-01/ifulchina-ops/gta6-trophy-guide-01/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![Reward](https://make.fun/badge/gta6-trophy-guide-01/ifulchina-ops/gta6-trophy-guide-01/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 
-An offline guide and tracker for all **55 Grand Theft Auto VI trophies** on PlayStation 5 — 1 platinum, 2 gold, 6 silver, 46 bronze, 28 of them hidden on PSN. Each trophy carries its official name, description and grade, a guide to unlocking it written for this entry, numbered steps, and the sources behind every fact. Around that sit a six-phase roadmap to the platinum with hour estimates, the five missable trophies with their timing, and a tickable before-the-finale checklist.
+An offline guide and tracker for all **55 Grand Theft Auto VI trophies** on PlayStation 5 — 1 platinum, 2 gold, 6 silver, 46 bronze, 28 of them hidden on PSN. Each trophy carries its official name, description and grade, a guide to unlocking it, numbered steps, and the sources behind every fact. Around that sit a six-phase roadmap to the platinum with hour estimates, the five missable trophies with their timing, and a tickable before-the-finale checklist.
 
 GTA VI's list was published before the game shipped, so every guide is labelled honestly:
 

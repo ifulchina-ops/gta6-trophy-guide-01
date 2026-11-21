@@ -8,7 +8,9 @@
    into five groups: ink and paper (the two everything else is read against),
    the evening hues used for chrome and accents, one colour per trophy grade,
    the warning/success pairs for missables and earned rows, and two shape
-   tokens (radius, shadow) that keep the cards looking like one family. */
+   tokens (radius, shadow) that keep the cards looking like one family.
+   Change a value here rather than in a rule: a stray hex outside :root is the
+   one thing that makes the palette drift. */
 
 
 :root {

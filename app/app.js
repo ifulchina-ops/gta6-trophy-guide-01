@@ -10,13 +10,15 @@
 // build step, no network.
 //
 // The file is laid out in the order the page uses it:
-//   storage     — loadIds/saveIds, and the three localStorage keys above
+//   storage     — loadIds/saveIds over the three KEYS declared just below
 //   filtering   — the search/filter predicate shared by the list and the counts
-//   renderers   — checklist cards, the six-phase roadmap with its time strip,
-//                 missables, sources, and the detail pane with its guide and
-//                 SOURCES block
+//   renderers   — one per view: checklist cards, the six-phase roadmap with its
+//                 time strip, missables with the finale checklist, sources, and
+//                 the detail pane with its guide, numbered steps and SOURCES
 //   events      — tick, filter, spoiler, export/import/reset, tab switching
 //   boot        — one fetch of the trophy data, then the first render
+// All four views read the same in-memory state, so a tick anywhere updates the
+// header counts, the cards and the per-phase done totals together.
 // Rendering is re-run from state rather than patched in place: a tick rebuilds
 // the counts and the cards from the same arrays, so the list, the header and
 // the roadmap cannot drift apart. Nothing in this module writes to the DOM
